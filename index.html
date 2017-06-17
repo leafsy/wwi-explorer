@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>World War I in Europe</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://d3js.org/topojson.v2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="js/map.js"></script>
+<script src="js/time.js"></script>
+<script src="js/info.js"></script>
+<style>
+
+body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+.hidden,.inactive { display: none; }
+
+#map { background: #334; }
+.label rect { fill: #000; opacity: 0.6; }
+.label text { fill: #eee; }
+#focus { fill: none; stroke: #edc; 
+		 animation: blinker 1s linear infinite;
+		 -moz-animation: blinker 2s linear infinite;
+		 -webkit-animation: blinker 2s linear infinite; }
+@keyframes blinker { 50% { opacity: 0.6; } }
+-moz-@keyframes blinker { 50% { opacity: 0.6; } }
+-webkit-@keyframes blinker { 50% { opacity: 0.6; } }
+g.countriesB path { fill: #889; stroke: #555; }
+g.countriesB path.entente { fill: #66b; }
+g.countriesB path.central { fill: #b66; }
+g.countriesA path { opacity: 0; stroke: none; }
+g.countriesA path.hover { fill: black; opacity: 0.1; }
+g.rivers path { fill: none; stroke: #336; }
+g.cities circle { fill: #ddf; stroke: #333; }
+g.cities text { fill: #fff; cursor: default; }
+g.minor circle { stroke-width: 0.5px; }
+g.capital  circle { fill: #f33; }
+
+#dial { background: #111; }
+#timeBkgrd rect { fill: #ccc; }
+#timeBkgrd line { stroke: #fff; }
+#timeAxis line,#timeAxis path { stroke: #eee; }
+#timeAxis text { fill: #eee; cursor: default; }
+#currentMarker path { fill: #111; }
+#currentMarker line { stroke: #c33; stroke-width: 1.5px; }
+#yearLabel { fill: #eee; font-size: 20px; }
+g.events circle { fill: #555; cursor: pointer; }
+g.events circle.hover { fill: #c63; stroke: #c63; stroke-width: 2px; }
+g.events text { fill: #fff; }
+#eventDesc rect { fill: #bde; opacity: 0.95; stroke: #36c;
+				  stroke-width: 5px; stroke-dasharray: 0,280,90,0; }
+#eventDesc rect.event { fill: #edb; stroke: #c63; }
+#eventDesc foreignObject h3 { margin: 0 0 5px; line-height: 90%; }
+#eventDesc foreignObject p { margin: 0; text-align: right; }
+#eventDesc line { stroke: #c63; stroke-width: 2px; }
+
+#info { background: #aaa; }
+
+</style>
+</head>
+
+<body>
+
+   <svg id="map"></svg><!--
+--><svg id="info"></svg><!--
+--><svg id="dial"></svg>
+
+<script>
+
+var countries, rivers, cities, alliances;
+var events;
+var numFiles = 5;
+
+d3.queue()
+.defer(d3.json, "data/europe_1914.geojson")
+.defer(d3.json, "data/europe_rivers.json")
+.defer(d3.csv, "data/cities.csv")
+.defer(d3.csv, "data/events.csv")
+.defer(d3.csv, "data/alliances.csv")
+.await(function (error, ctry, rvr, cty, evt, alc) {
+	if (error) { console.log(error); }
+
+	countries = ctry.features;
+	rivers = rvr;
+	cities = [];
+	cty.forEach(function(c) {
+		c.pop = Number(c.pop);
+		c.lat = Number(c.lat);
+		c.lng = Number(c.lng);
+		if (c.pop >= 100000) cities.push(c);
+	});
+	events = evt;
+	events.forEach(function(e) {
+		e.position = Number(e.position);
+		e.date = new Date(e.date);
+		e.lat = Number(e.lat);
+		e.lng = Number(e.lng);
+	});
+	alc.forEach(function(a) {
+		countries.forEach(function(c) {
+			if (a.country === c.properties.country) {
+				c.properties.enter = new Date(a.enter);
+				c.properties.exit = new Date(a.exit);
+				c.properties.is_ally = Number(a.is_ally);
+			}
+		});
+	});
+
+	showMap();
+	showTime();
+	showInfo();
+});
+
+</script>
+
+</body>
+</html>
