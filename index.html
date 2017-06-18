@@ -32,6 +32,7 @@ g.cities circle { fill: #ddf; stroke: #333; }
 g.cities text { fill: #fff; cursor: default; }
 g.minor circle { stroke-width: 0.5px; }
 g.capital  circle { fill: #f33; }
+g.front g path { fill: none; stroke: #e82; stroke-width: 2px; }
 
 #dial { background: #111; }
 #timeBkgrd rect { fill: #ccc; }
@@ -64,7 +65,7 @@ g.events text { fill: #fff; }
 
 <script>
 
-var countries, rivers, cities, alliances;
+var countries, rivers, cities, alliances, fronts;
 var events;
 var numFiles = 5;
 
@@ -74,7 +75,10 @@ d3.queue()
 .defer(d3.csv, "data/cities.csv")
 .defer(d3.csv, "data/events.csv")
 .defer(d3.csv, "data/alliances.csv")
-.await(function (error, ctry, rvr, cty, evt, alc) {
+.defer(d3.json, "data/b_front.geojson")
+.defer(d3.json, "data/i_front.geojson")
+.await(function (error, ctry, rvr, cty, evt, alc,
+						bft, ift) {
 	if (error) { console.log(error); }
 
 	countries = ctry.features;
@@ -100,6 +104,14 @@ d3.queue()
 				c.properties.exit = new Date(a.exit);
 				c.properties.is_ally = Number(a.is_ally);
 			}
+		});
+	});
+	fronts = [];
+	fronts[0] = bft.features;
+	fronts[1] = ift.features;
+	fronts.forEach(function(f) {
+		f.forEach(function(d) {
+			d.properties.date = new Date(d.properties.date);
 		});
 	});
 

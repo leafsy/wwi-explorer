@@ -210,12 +210,15 @@ function closeInTime(t1, t2) {
 }
 
 function updateTime(duration) {
+
+	var time = getTime();
 	gTimeline.transition().duration(duration)
 	.attr("transform", "translate("+timePos+")");
+
 	var flag = false;
 	gEvents.selectAll("circle")
 	.each(function(d) {
-		if (closeInTime(d.date, getTime())) {
+		if (closeInTime(d.date, time)) {
 			d3.selectAll("circle.hover").classed("hover", false);
 			d3.select(this).each(d3.select(this).on("mouseover"));
 			flag = true;
@@ -232,14 +235,26 @@ function updateTime(duration) {
 			desc.select("p").text(initDesc.date);
 		}
 	});
-	year.text(getTime().getFullYear());
+	year.text(time.getFullYear());
+
 	gCountriesB.selectAll("path")
 	.classed("entente", function(d) {
 		return d.properties.is_ally &&
-			getTime() >= d.properties.enter && getTime() < d.properties.exit;
+			time >= d.properties.enter && time < d.properties.exit;
 	})
 	.classed("central", function(d) {
 		return !d.properties.is_ally &&
-			getTime() >= d.properties.enter && getTime() < d.properties.exit;
+			time >= d.properties.enter && time < d.properties.exit;
 	});
+
+	gFronts.selectAll("g").selectAll("path")
+	.classed("hidden", function(d) {
+		if (time >= d.properties.date) {
+			d3.select(this.parentNode).selectAll("path")
+			.classed("hidden", true);
+			return false;
+		}
+		return true;
+	});
+
 }
