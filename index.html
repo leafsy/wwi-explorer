@@ -25,6 +25,8 @@ body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
 g.countriesB path { fill: #889; stroke: #555; }
 g.countriesB path.entente { fill: #66b; }
 g.countriesB path.central { fill: #b66; }
+g.countriesB path.defeated { fill: #a8a; }
+g.countriesB path._central { fill: #b88; }
 g.countriesA path { opacity: 0; stroke: none; }
 g.countriesA path.hover { fill: black; opacity: 0.1; }
 g.rivers path { fill: none; stroke: #336; }
@@ -74,14 +76,19 @@ d3.queue()
 .defer(d3.json, "data/europe_rivers.json")
 .defer(d3.csv, "data/cities.csv")
 .defer(d3.csv, "data/events.csv")
-.defer(d3.csv, "data/alliances.csv")
-.defer(d3.json, "data/b_front.geojson")
-.defer(d3.json, "data/i_front.geojson")
-.await(function (error, ctry, rvr, cty, evt, alc,
-						bft, ift) {
+.defer(d3.json, "data/status.json")
+.defer(d3.json, "data/front_b.geojson")
+.defer(d3.json, "data/front_i.geojson")
+.defer(d3.json, "data/front_w.geojson")
+.await(function (error, ctry, rvr, cty, evt, sts,
+						bft, ift, wft) {
 	if (error) { console.log(error); }
 
 	countries = ctry.features;
+	countries.forEach(function(c) {
+		c.properties.dates = [];
+		c.properties.status = [];
+	});
 	rivers = rvr;
 	cities = [];
 	cty.forEach(function(c) {
@@ -97,18 +104,21 @@ d3.queue()
 		e.lat = Number(e.lat);
 		e.lng = Number(e.lng);
 	});
-	alc.forEach(function(a) {
+	sts.countries.forEach(function(a) {
 		countries.forEach(function(c) {
-			if (a.country === c.properties.country) {
-				c.properties.enter = new Date(a.enter);
-				c.properties.exit = new Date(a.exit);
-				c.properties.is_ally = Number(a.is_ally);
+			if (a.name === c.properties.country) {
+				for (var i = 0; i < a.dates.length; i++) {
+					a.dates[i] = new Date(a.dates[i]);
+				}
+				c.properties.dates = a.dates;
+				c.properties.status = a.status;
 			}
 		});
 	});
 	fronts = [];
 	fronts[0] = bft.features;
 	fronts[1] = ift.features;
+	fronts[2] = wft.features;
 	fronts.forEach(function(f) {
 		f.forEach(function(d) {
 			d.properties.date = new Date(d.properties.date);

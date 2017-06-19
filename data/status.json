@@ -1,0 +1,204 @@
+{
+  "countries": [
+    {
+      "name": "Kingdom of Belgium",
+      "dates": [
+        "8/4/1914",
+        "10/15/1914",
+        "11/11/1918",
+        "6/28/1919"
+      ],
+      "status": [
+        "entente",
+        "_central",
+        "entente",
+        ""
+      ]
+    },
+    {
+      "name": "German Empire",
+      "dates": [
+        "8/1/1914",
+        "11/11/1918",
+        "6/28/1919"
+      ],
+      "status": [
+        "central",
+        "defeated",
+        ""
+      ]
+    },
+    {
+      "name": "French Third Republic",
+      "dates": [
+        "8/3/1914",
+        "6/28/1919"
+      ],
+      "status": [
+        "entente",
+        ""
+      ]
+    },
+    {
+      "name": "Russian Empire",
+      "dates": [
+        "8/1/1914",
+        "12/15/1917",
+        "3/3/1918"
+      ],
+      "status": [
+        "entente",
+        "defeated",
+        ""
+      ]
+    },
+    {
+      "name": "United Kingdom of Great Britain and Ireland",
+      "dates": [
+        "8/4/1914",
+        "6/28/1919"
+      ],
+      "status": [
+        "entente",
+        ""
+      ]
+    },
+    {
+      "name": "Ottoman Empire",
+      "dates": [
+        "11/1/1914",
+        "10/30/1918",
+        "6/28/1919"
+      ],
+      "status": [
+        "central",
+        "defeated",
+        ""
+      ]
+    },
+    {
+      "name": "Austro-Hungarian Empire",
+      "dates": [
+        "7/28/1914",
+        "11/3/1918",
+        "6/28/1919"
+      ],
+      "status": [
+        "central",
+        "defeated",
+        ""
+      ]
+    },
+    {
+      "name": "Kingdom of Serbia",
+      "dates": [
+        "7/28/1914",
+        "11/25/1915",
+        "10/15/1918"
+      ],
+      "status": [
+        "entente",
+        "_central",
+        ""
+      ]
+    },
+    {
+      "name": "Kingdom of Italy",
+      "dates": [
+        "5/23/1915",
+        "6/28/1919"
+      ],
+      "status": [
+        "entente",
+        ""
+      ]
+    },
+    {
+      "name": "Kingdom of Montenegro",
+      "dates": [
+        "8/5/1914",
+        "1/17/1916",
+        "10/18/1918"
+      ],
+      "status": [
+        "entente",
+        "_central",
+        ""
+      ]
+    },
+    {
+      "name": "Kingdom of Bulgaria",
+      "dates": [
+        "10/14/1915",
+        "9/29/1918",
+        "6/28/1919"
+      ],
+      "status": [
+        "central",
+        "defeated",
+        ""
+      ]
+    },
+    {
+      "name": "Kingdom of Romania",
+      "dates": [
+        "8/27/1916",
+        "12/9/1917",
+        "5/7/1918",
+        "11/10/1918",
+        "6/28/1919"
+      ],
+      "status": [
+        "entente",
+        "defeated",
+        "",
+        "entente",
+        ""
+      ]
+    },
+    {
+      "name": "Kingdom of Greece",
+      "dates": [
+        "7/2/1917",
+        "6/28/1919"
+      ],
+      "status": [
+        "entente",
+        ""
+      ]
+    },
+    {
+      "name": "Portuguese Republic",
+      "dates": [
+        "3/9/1916",
+        "6/28/1919"
+      ],
+      "status": [
+        "entente",
+        ""
+      ]
+    },
+    {
+      "name": "Grand Duchy of Luxembourg",
+      "dates": [
+        "8/2/1914",
+        "11/11/1918"
+      ],
+      "status": [
+        "_central",
+        ""
+      ]
+    },
+    {
+      "name": "Principality of Albania",
+      "dates": [
+        "1/28/1916",
+        "10/5/1918"
+      ],
+      "status": [
+        "_central",
+        ""
+      ]
+    }
+  ]
+}

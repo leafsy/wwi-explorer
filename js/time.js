@@ -238,13 +238,11 @@ function updateTime(duration) {
 	year.text(time.getFullYear());
 
 	gCountriesB.selectAll("path")
-	.classed("entente", function(d) {
-		return d.properties.is_ally &&
-			time >= d.properties.enter && time < d.properties.exit;
-	})
-	.classed("central", function(d) {
-		return !d.properties.is_ally &&
-			time >= d.properties.enter && time < d.properties.exit;
+	.attr("class", function(d) {
+		d = d.properties;
+		for (var i = d.dates.length-1; i >= 0; i--) {
+			if (d.dates[i] <= time) return d.status[i];
+		}
 	});
 
 	gFronts.selectAll("g").selectAll("path")

@@ -13332,6 +13332,16 @@
           ]
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "date": "6/28/1919"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": []
+      }
     }
   ]
 }
