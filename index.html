@@ -1,6 +1,8 @@
 <html>
 <head>
 <title>World War I in Europe</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<meta charset="utf-8">
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="http://d3js.org/topojson.v2.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -24,17 +26,18 @@ body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
 -webkit-@keyframes blinker { 50% { opacity: 0.6; } }
 g.countriesB path { fill: #889; stroke: #555; }
 g.countriesB path.entente { fill: #66b; }
-g.countriesB path.central { fill: #b66; }
+g.countriesB path.central { fill: #c66; }
 g.countriesB path.defeated { fill: #a8a; }
-g.countriesB path._central { fill: #b88; }
+g.countriesB path._central { fill: #c88; }
 g.countriesA path { opacity: 0; stroke: none; }
-g.countriesA path.hover { fill: black; opacity: 0.1; }
+g.countriesA path.hover { fill: #444; opacity: 0.1; }
 g.rivers path { fill: none; stroke: #336; }
 g.cities circle { fill: #ddf; stroke: #333; }
 g.cities text { fill: #fff; cursor: default; }
 g.minor circle { stroke-width: 0.5px; }
 g.capital  circle { fill: #f33; }
-g.front g path { fill: none; stroke: #e82; stroke-width: 2px; }
+g.front g path { fill: none; stroke: #f93; stroke-width: 2px; }
+g.battle path { fill: #f93; opacity: 0.5; }
 
 #dial { background: #111; }
 #timeBkgrd rect { fill: #ccc; }
@@ -43,7 +46,8 @@ g.front g path { fill: none; stroke: #e82; stroke-width: 2px; }
 #timeAxis text { fill: #eee; cursor: default; }
 #currentMarker path { fill: #111; }
 #currentMarker line { stroke: #c33; stroke-width: 1.5px; }
-#yearLabel { fill: #eee; font-size: 20px; }
+#yearLabel,#playButton { fill: #eee; font-size: 20px; }
+#playButton { cursor: pointer; fill: #eee; font-size: 20px; }
 g.events circle { fill: #555; cursor: pointer; }
 g.events circle.hover { fill: #c63; stroke: #c63; stroke-width: 2px; }
 g.events text { fill: #fff; }
@@ -68,7 +72,7 @@ g.events text { fill: #fff; }
 <script>
 
 var countries, rivers, cities, alliances, fronts;
-var events;
+var events, battles;
 var numFiles = 5;
 
 d3.queue()
@@ -77,11 +81,14 @@ d3.queue()
 .defer(d3.csv, "data/cities.csv")
 .defer(d3.csv, "data/events.csv")
 .defer(d3.json, "data/status.json")
+.defer(d3.json, "data/battles.geojson")
 .defer(d3.json, "data/front_b.geojson")
 .defer(d3.json, "data/front_i.geojson")
 .defer(d3.json, "data/front_w.geojson")
-.await(function (error, ctry, rvr, cty, evt, sts,
-						bft, ift, wft) {
+.defer(d3.json, "data/front_e.geojson")
+.defer(d3.json, "data/front_r.geojson")
+.await(function (error, ctry, rvr, cty, evt, sts, bat,
+						bft, ift, wft, eft, rft) {
 	if (error) { console.log(error); }
 
 	countries = ctry.features;
@@ -115,10 +122,17 @@ d3.queue()
 			}
 		});
 	});
+	battles = bat.features;
+	battles.forEach(function(b) {
+		b.properties.start = new Date(b.properties.start);
+		b.properties.end = new Date(b.properties.end);
+	});
 	fronts = [];
 	fronts[0] = bft.features;
 	fronts[1] = ift.features;
 	fronts[2] = wft.features;
+	fronts[3] = eft.features;
+	fronts[4] = rft.features;
 	fronts.forEach(function(f) {
 		f.forEach(function(d) {
 			d.properties.date = new Date(d.properties.date);
@@ -128,6 +142,7 @@ d3.queue()
 	showMap();
 	showTime();
 	showInfo();
+
 });
 
 </script>

@@ -28,7 +28,7 @@ projection.translate(initT);
 projection.scale(initS);
 var pathGenerator = d3.geoPath().projection(projection);
 
-var map, gCountriesB, gCountriesA, gRivers, gCities, gFronts;
+var map, gCountriesB, gCountriesA, gRivers, gCities, gFronts, gBattles;
 var focus, gLabel, gCLabel;
 
 function showMap() {
@@ -49,6 +49,7 @@ function showMap() {
 	drawCountriesBelow();
 	drawCountriesAbove();
 	//drawRivers();
+	drawBattles();
 	drawFronts();
 	drawCities();
 
@@ -118,6 +119,19 @@ function drawRivers() {
 	paths.enter()
 	.append("path")
 	.merge(paths)
+	.attr("d", pathGenerator);
+
+}
+
+function drawBattles() {
+
+	gBattles = map.append("g").attr("class", "battle");
+
+	var paths = gBattles.selectAll("path").data(battles);
+	paths.enter()
+	.append("path")
+	.merge(paths)
+	.attr("class", "hidden")
 	.attr("d", pathGenerator);
 
 }
@@ -246,4 +260,5 @@ function redraw() {
 	gCLabel.classed("hidden", true)
 	.classed("inactive", scaleCutoff > t.k);
 	gFronts.attr("transform", t);
+	gBattles.attr("transform", t);
 }

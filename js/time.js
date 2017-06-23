@@ -23,6 +23,8 @@ var drag = d3.drag()
 var timeScale = d3.scaleTime()
 .domain(duration)
 .range([0,timeLength]);
+var interval = timeScale(new Date("1/2/1916")) -
+ 			   timeScale(new Date("1/1/1916"));
 
 var moveScale = d3.scaleTime()
 .domain([timeX, timeX-timeLength])
@@ -31,7 +33,7 @@ function getTime() {
 	return moveScale(timePos[0]);
 }
 
-var dial, year, gTimeline, gEvents;
+var dial, year, playButton, gTimeline, gEvents;
 var desc, gDesc, descLine1, descLine2;
 
 function showTime() {
@@ -72,6 +74,7 @@ function showTime() {
 
 	drawEvents();
 	drawDesc();
+	drawPlay();
 
 }
 
@@ -245,6 +248,11 @@ function updateTime(duration) {
 		}
 	});
 
+	gBattles.selectAll("path")
+	.classed("hidden", function(d) {
+		return time < d.properties.start || time > d.properties.end;
+	});
+
 	gFronts.selectAll("g").selectAll("path")
 	.classed("hidden", function(d) {
 		if (time >= d.properties.date) {
@@ -255,4 +263,33 @@ function updateTime(duration) {
 		return true;
 	});
 
+}
+
+var playing = false;
+function drawPlay() {
+
+	playButton = dial.append("text")
+	.attr("id", "playButton")
+	.attr("x", 15)
+	.attr("y", timeHeight-15)
+	.attr("font-family","FontAwesome")
+	.text('\uf04b')
+	.on("click", function() {
+		playing = !playing;
+		if (playing) {
+			d3.select(this).text('\uf04c');
+			play();
+		}
+	});
+
+}
+
+function play() {          
+	setTimeout(function() {
+		timePos[0] = Math.max(timePos[0]-interval, limits[1]);
+		updateTime(10);
+		playing &= timePos[0] > limits[1];
+		if (playing) play();
+		else playButton.text('\uf04b');
+	}, 60);
 }

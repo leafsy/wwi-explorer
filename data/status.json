@@ -4,7 +4,7 @@
       "name": "Kingdom of Belgium",
       "dates": [
         "8/4/1914",
-        "10/15/1914",
+        "10/10/1914",
         "11/11/1918",
         "6/28/1919"
       ],
@@ -197,6 +197,17 @@
       ],
       "status": [
         "_central",
+        ""
+      ]
+    },
+    {
+      "name": "Grand Duchy of Finland",
+      "dates": [
+        "8/1/1914",
+        "12/6/1917"
+      ],
+      "status": [
+        "entente",
         ""
       ]
     }
