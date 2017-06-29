@@ -49,8 +49,8 @@ function showMap() {
 	drawCountriesBelow();
 	drawCountriesAbove();
 	//drawRivers();
-	drawBattles();
 	drawFronts();
+	drawBattles();
 	drawCities();
 
 	focus = map.append("circle")
@@ -127,12 +127,36 @@ function drawBattles() {
 
 	gBattles = map.append("g").attr("class", "battle");
 
+	var mouseover = function(d) {
+		var array = d.geometry.coordinates[0];
+		var center = array[0];
+		for (var i = 1; i < array.length; i++) {
+			center = array[i][1] < center[1]? array[i] : center;
+		}
+		center = projection(center);
+		var text = gCLabel.select("text");
+		text.text(d.properties.name);
+		var width = text.nodes()[0].getBBox().width + 2*clabelMargin;
+		
+		var translate = gBattles.attr("transform");
+		gCLabel.classed("hidden", false)
+		.attr("transform", translate)
+		.select("rect")
+		.attr("x", center[0]).attr("y", center[1])
+		.attr("width", width);
+		text.attr("x", center[0]).attr("y", center[1]);
+	}
+
 	var paths = gBattles.selectAll("path").data(battles);
 	paths.enter()
 	.append("path")
 	.merge(paths)
 	.attr("class", "hidden")
-	.attr("d", pathGenerator);
+	.attr("d", pathGenerator)
+	.on("mouseover", mouseover)
+	.on("mouseout", function(d) {
+		gCLabel.classed("hidden", true);
+	});;
 
 }
 

@@ -13,10 +13,10 @@
 
 body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
 .hidden,.inactive { display: none; }
+text { fill: #fff; cursor: default; }
 
 #map { background: #334; }
 .label rect { fill: #000; opacity: 0.6; }
-.label text { fill: #eee; }
 #focus { fill: none; stroke: #edc; 
 		 animation: blinker 1s linear infinite;
 		 -moz-animation: blinker 2s linear infinite;
@@ -32,25 +32,28 @@ g.countriesB path._central { fill: #c88; }
 g.countriesA path { opacity: 0; stroke: none; }
 g.countriesA path.hover { fill: #444; opacity: 0.1; }
 g.rivers path { fill: none; stroke: #336; }
-g.cities circle { fill: #ddf; stroke: #333; }
-g.cities text { fill: #fff; cursor: default; }
+g.cities circle { fill: #ddf; stroke: #444; }
+g.cities circle:hover { stroke: #222; }
 g.minor circle { stroke-width: 0.5px; }
 g.capital  circle { fill: #f33; }
 g.front g path { fill: none; stroke: #f93; stroke-width: 2px; }
-g.battle path { fill: #f93; opacity: 0.5; }
+g.battle path { cursor: pointer; fill: #ee9; fill-opacity: 0.3; }
+g.battle path:hover { fill-opacity: 0.4; }
+g.battle path.clicked { stroke: #ee9; stroke-opacity: 0.5; }
 
 #dial { background: #111; }
 #timeBkgrd rect { fill: #ccc; }
 #timeBkgrd line { stroke: #fff; }
+#timeBkgrd text { fill: #333; opacity: 0.3; }
+#timeBkgrd text:hover { opacity: 1; }
 #timeAxis line,#timeAxis path { stroke: #eee; }
-#timeAxis text { fill: #eee; cursor: default; }
 #currentMarker path { fill: #111; }
 #currentMarker line { stroke: #c33; stroke-width: 1.5px; }
-#yearLabel,#playButton { fill: #eee; font-size: 20px; }
-#playButton { cursor: pointer; fill: #eee; font-size: 20px; }
+#yearLabel { font-size: 20px; }
+#playButtons text { cursor: pointer; font-size: 20px; }
 g.events circle { fill: #555; cursor: pointer; }
 g.events circle.hover { fill: #c63; stroke: #c63; stroke-width: 2px; }
-g.events text { fill: #fff; }
+#battleLine { stroke: #c33; stroke-width: 2.5px; opacity: 0.6; }
 #eventDesc rect { fill: #bde; opacity: 0.95; stroke: #36c;
 				  stroke-width: 5px; stroke-dasharray: 0,280,90,0; }
 #eventDesc rect.event { fill: #edb; stroke: #c63; }
@@ -59,6 +62,8 @@ g.events text { fill: #fff; }
 #eventDesc line { stroke: #c63; stroke-width: 2px; }
 
 #info { background: #aaa; }
+#legendTab * { cursor: pointer }
+#legendTab rect, #legendBox rect { fill: #333; }
 
 </style>
 </head>
@@ -79,7 +84,7 @@ d3.queue()
 .defer(d3.json, "data/europe_1914.geojson")
 .defer(d3.json, "data/europe_rivers.json")
 .defer(d3.csv, "data/cities.csv")
-.defer(d3.csv, "data/events.csv")
+.defer(d3.tsv, "data/events.csv")
 .defer(d3.json, "data/status.json")
 .defer(d3.json, "data/battles.geojson")
 .defer(d3.json, "data/front_b.geojson")
@@ -125,7 +130,9 @@ d3.queue()
 	battles = bat.features;
 	battles.forEach(function(b) {
 		b.properties.start = new Date(b.properties.start);
-		b.properties.end = new Date(b.properties.end);
+		var end = new Date(b.properties.end);
+		end.setDate(end.getDate()+1);
+		b.properties.end = end;
 	});
 	fronts = [];
 	fronts[0] = bft.features;

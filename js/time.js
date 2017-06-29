@@ -7,14 +7,15 @@ var timeLength = timeWidth*20;
 var duration = [new Date("1914-01-01"), new Date("1919-12-31")];
 var timeX = timeWidth/2;
 var timeY = 100;
-var limits = [-700, -timeLength+1500];
+var limits = [-750, -timeLength+1500];
 var timePos = [limits[0], timeY];
 var topMargin = 20;
 var botMargin = 20;
 var slots = [-60,-44,-28,-12];
+var slotLabels = ["general/western","western","eastern","balkan/italian"];
 var markerRadius = 2.5;
 var lineSlant = [8,8]
-var initDesc = { title: "Timeline of the Great War - major events and battles",
+var initDesc = { title: "Timeline of WWI: major events",
 			     date: "June 1914 - June 1919"};
 
 var drag = d3.drag()
@@ -33,7 +34,7 @@ function getTime() {
 	return moveScale(timePos[0]);
 }
 
-var dial, year, playButton, gTimeline, gEvents;
+var dial, year, gTimeline, gEvents, battleLine;
 var desc, gDesc, descLine1, descLine2;
 
 function showTime() {
@@ -66,12 +67,13 @@ function showTime() {
 	.attr("id", "timeAxis")
 	.call(timeAxis);
 
-	year = dial.append("text")
+	year = current.append("text")
 	.attr("id", "yearLabel")
 	.attr("x", timeX-20)
 	.attr("y", timeHeight-botMargin)
 	.text(getTime().getFullYear());
 
+	drawBattle();
 	drawEvents();
 	drawDesc();
 	drawPlay();
@@ -95,6 +97,19 @@ function drawBackground() {
 	.attr("x1", 0).attr("x2", timeWidth+descWidth)
 	.attr("y1", function(d) { return timeY+d; })
 	.attr("y2", function(d) { return timeY+d; });
+
+	var labels = bkgrd.selectAll("text").data(slots);
+	labels.enter()
+	.append("text")
+	.merge(labels)
+	.attr("x", 5)
+	.attr("y", function(d) { return timeY+d+3; })
+	.text(function(d) {
+		var i = 0;
+		for (var i = 0; i < slots.length; i++) {
+			if (slots[i] === d) return slotLabels[i];
+		}
+	});
 
 }
 
@@ -156,6 +171,25 @@ function drawEvents() {
 	.on("mouseover", mouseover)
 	.on("mouseout", mouseout)
 	.on("click", mouseclick);
+
+}
+
+function drawBattle() {
+
+	battleLine = gTimeline.append("line")
+	.attr("id", "battleLine")
+	.attr("class", "hidden");
+
+	gBattles.selectAll("path")
+	.on("click", function(d) {
+		d3.selectAll("path.clicked").classed("clicked", false);
+		d3.select(this).classed("clicked", true);
+		battleLine.classed("hidden", false)
+		.attr("x1", timeScale(d.properties.start))
+		.attr("x2", timeScale(d.properties.end))
+		.attr("y1", slots[d.properties.position])
+		.attr("y2", slots[d.properties.position]);
+	});
 
 }
 
@@ -238,6 +272,7 @@ function updateTime(duration) {
 			desc.select("p").text(initDesc.date);
 		}
 	});
+	focus.classed("hidden", true);
 	year.text(time.getFullYear());
 
 	gCountriesB.selectAll("path")
@@ -265,14 +300,17 @@ function updateTime(duration) {
 
 }
 
+var playButton;
 var playing = false;
 function drawPlay() {
 
-	playButton = dial.append("text")
-	.attr("id", "playButton")
-	.attr("x", 15)
+	var buttons = dial.append("g")
+	.attr("id", "playButtons")
+	.attr("font-family", "FontAwesome");
+
+	playButton = buttons.append("text")
+	.attr("x", 50)
 	.attr("y", timeHeight-15)
-	.attr("font-family","FontAwesome")
 	.text('\uf04b')
 	.on("click", function() {
 		playing = !playing;
@@ -280,6 +318,23 @@ function drawPlay() {
 			d3.select(this).text('\uf04c');
 			play();
 		}
+	});
+
+	buttons.append("text")
+	.attr("x", 15)
+	.attr("y", timeHeight-15)
+	.text('\uf048')
+	.on("click", function() {
+		timePos[0] = limits[0];
+		updateTime(100);
+	});
+	buttons.append("text")
+	.attr("x", 90)
+	.attr("y", timeHeight-15)
+	.text('\uf051')
+	.on("click", function() {
+		timePos[0] = limits[1];
+		updateTime(100);
 	});
 
 }

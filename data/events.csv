@@ -1,63 +1,57 @@
-﻿name,description,position,date,lat,lng
-Assassination of Archduke Ferdinand,,3,6/28/1914,43.8563,18.4131
-Ultimatum sent to Serbia,,3,7/23/1914,44.795936,20.446212
-Austria-Hungary declares war on Serbia,,3,7/28/1914,48.2082,16.3738
-Germany declares war on Russia,,2,8/1/1914,52.52,13.405
-Germany declares war on France,,0,8/3/1914,52.52,13.405
-German troops enter Belgium,,0,8/4/1914,50.351723,6.075918
-Great Britain declares war on Germany,,1,8/4/1914,51.510363,-0.126367
-Montenegro declares war on Austria-Hungary,,3,8/5/1914,42.434007,19.254503
-British Expeditionary Force arrives in France,,1,8/7/1914,50.729547,1.606111
-Big Bertha used against Liege Forts,,0,8/12/1914,50.632895,5.579175
-Austro-Hungarian troops invade Serbia,,3,8/12/1914,44.39455,19.107742
-French troops enter Alsace-Lorraine,,1,8/14/1914,48.638036,6.843278
-Allies' Great Retreat towards the River Marne,,0,8/24/1914,,
-The Royal Navy prevails at Heligoland Bight,,1,8/28/1914,54.166667,8.066678
-St. Petersburg renamed Petrograd,,2,9/1/1914,59.935041,30.327781
-Germans capture Reims,,0,9/4/1914,49.295418,4.035472
-Russians capture Lviv,,2,9/11/1914,49.841304,24.03249
-"German advance halted, Schlieffen Plan abandoned",,0,9/12/1914,,
-Russia withdraws from East Prussia with heavy casualties,,2,9/14/1914,,
-Race to the Sea begins,,0,9/17/1914,,
-The Siege of Przemyśl begins,,2,9/24/1914,49.784197,22.768262
-Germans capture Antwerp,,1,10/10/1914,51.219463,4.4028
-Turkish surprise attack on Russian Black Sea coast,,3,10/29/1914,46.406098,30.887101
-Franco-Belgian forces secure coastline of Belgium,,0,10/31/1914,,
-Russia declares war on the Ottoman Empire,,3,11/1/1914,59.935041,30.327781
-Britain begins naval blockade of Germany,,1,11/2/1914,,
-Sultan Mehmed V declares Jihad on the Allies,,3,11/11/1914,41.018454,28.973691
-Austro-Hungarians leave Serbia,,3,12/15/1914,,
-"German fleet shells Scarborough, England",,1,12/16/1914,54.283466,-0.398353
-Christmas Truce on the Western Front,,0,12/25/1914,,
-First German Zeppelin raid on England,,1,1/19/1915,,
-Germany blocks the sea using submarines,,1,2/4/1915,,
-Allied naval attack on the Dardanelles,,3,3/18/1915,,
-German gas attack at Ypres,,0,4/22/1915,,
-The Lusitania was sunk,,1,5/7/1915,,
-Italy declares war on Austria-Hungary,,3,5/23/1915,,
-Germany captures Warsaw,,2,8/5/1915,52.226126,21.021361
-Bulgaria declares war on Serbia,,3,10/14/1915,,
-Germany declares war on Portugal,,0,3/9/1916,,
-Easter Rising by Irish nationalists,,1,4/23/1916,,
-Anti-war demonstrations in Germany,,0,5/1/1916,,
-Romania joins the war with the Allies,,3,8/27/1916,,
-First tanks used by British forces at the Somme,,0,9/15/1916,,
-Zimmermann Telegram intercepted by Britain,,1,1/19/1917,,
-Germany begins unrestricted submarine warfare,,0,2/1/1917,,
-Czar Nicholas II of Russia abdicates,,2,3/15/1917,,
-United States declares war on Germany,,1,4/6/1917,,
-Lenin Arrives in Russia,,2,4/16/1917,,
-English workers call strikes,,1,5/1/1917,,
-United States Troops arrive in France,,0,6/25/1917,47.285559,-2.223025
-Greece declares war on the Central Powers,,3,7/2/1917,,
-German sailors mutiny,,0,8/2/1917,,
-Bolsheviks seize power in Russia,,2,11/7/1917,,
-Armistice between Russia and Germany,,2,12/15/1917,,
-Treaty of Brest-Litovsk signed,,2,3/3/1918,,
-Bombardment of Paris by the Paris Gun,,1,3/29/1918,48.855944,2.350181
-Allies break through at Albert,,0,8/21/1918,,
-Allied forces capture the Hindenberg Line,,0,10/5/1918,,
-Kaiser Wilhelm II of Germany abdicates,,1,11/9/1918,,
-"Armistice signed, ends war",,1,11/11/1918,,
-Paris Peace Conference begins,,0,1/12/1919,,
-Treaty of Versailles signed,,0,6/28/1919,,
+name	description	position	date	lat	lng
+Assassination of Archduke Ferdinand		3	6/28/1914	43.8563	18.4131
+Ultimatum sent to Serbia		3	7/23/1914	44.795936	20.446212
+Austria-Hungary declares war on Serbia		3	7/28/1914	48.2082	16.3738
+Germany declares war on Russia		2	8/1/1914	52.52	13.405
+Germany declares war on France		1	8/3/1914	52.52	13.405
+German troops enter Belgium; Britain declares war		0	8/4/1914	51.510363	-0.126367
+Montenegro declares war on Austria-Hungary		3	8/5/1914	42.434007	19.254503
+British Expeditionary Force arrives in France		0	8/7/1914	50.729547	1.606111
+Big Bertha levels Liege Forts		1	8/12/1914	50.632895	5.579175
+Allies' Great Retreat towards the River Marne		1	8/24/1914		
+The Royal Navy prevails at Heligoland Bight		0	8/28/1914	54.166667	8.066678
+St. Petersburg renamed Petrograd		2	9/1/1914	59.935041	30.327781
+Russians capture Lviv		2	9/11/1914	49.841304	24.03249
+"German advance halted, Schlieffen Plan abandoned"		1	9/12/1914		
+Race to the Sea begins		1	9/17/1914		
+The siege of Przemysl begins		2	9/24/1914	49.784197	22.768262
+Germans capture Antwerp		1	10/10/1914	51.219463	4.4028
+Turkish surprise attack on Russian Black Sea coast		3	10/29/1914	46.406098	30.887101
+Franco-Belgian forces secure coastline of Belgium		1	10/31/1914		
+Russia declares war on the Ottoman Empire		3	11/1/1914	59.935041	30.327781
+Britain begins naval blockade of Germany		0	11/2/1914		
+Sultan Mehmed V declares Jihad on the Allies		3	11/11/1914	41.018454	28.973691
+"German fleet shells Scarborough, England"		0	12/16/1914	54.283466	-0.398353
+Christmas Truce on the Western Front		1	12/25/1914		
+First German Zeppelin raid on England		0	1/19/1915		
+Germany blocks the sea using submarines		0	2/4/1915		
+Allied naval attack on the Dardanelles		3	3/18/1915		
+German gas attack at Ypres		0	4/22/1915		
+The Lusitania was sunk		0	5/7/1915		
+Italy declares war on Austria-Hungary		3	5/23/1915		
+Germany captures Warsaw		2	8/5/1915	52.226126	21.021361
+Bulgaria declares war on Serbia		3	10/14/1915		
+Germany declares war on Portugal		0	3/9/1916		
+Easter Rising by Irish nationalists		0	4/23/1916		
+Anti-war demonstrations in Germany		0	5/1/1916		
+Romania joins the war with the Allies		3	8/27/1916		
+First tanks used by British forces at the Somme		0	9/15/1916		
+Zimmermann Telegram intercepted by Britain		0	1/19/1917		
+Germany begins unrestricted submarine warfare		0	2/1/1917		
+Czar Nicholas II of Russia abdicates		2	3/15/1917		
+United States declares war on Germany		0	4/6/1917		
+Lenin Arrives in Russia		2	4/16/1917		
+English workers call strikes		0	5/1/1917		
+United States Troops arrive in France		1	6/25/1917	47.285559	-2.223025
+Greece declares war on the Central Powers		3	7/2/1917		
+German sailors mutiny		0	8/2/1917		
+Bolsheviks seize power in Russia		2	11/7/1917		
+Armistice between Russia and Germany		2	12/15/1917		
+Treaty of Brest-Litovsk signed		2	3/3/1918		
+Bombardment of Paris by the Paris Gun		1	3/29/1918	48.855944	2.350181
+Allies break through at Albert		1	8/21/1918		
+Allied forces capture the Hindenberg Line		1	10/5/1918		
+Kaiser Wilhelm II of Germany abdicates		0	11/9/1918		
+Germany signs armistice, ends war		0	11/11/1918		
+Paris Peace Conference begins		0	1/12/1919		
+Treaty of Versailles signed		0	6/28/1919		
