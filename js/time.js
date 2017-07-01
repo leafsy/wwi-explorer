@@ -12,11 +12,13 @@ var timePos = [limits[0], timeY];
 var topMargin = 20;
 var botMargin = 20;
 var slots = [-60,-44,-28,-12];
-var slotLabels = ["general/western","western","eastern","balkan/italian"];
-var markerRadius = 2.5;
+var slotLabels = ["western/other","western","eastern","balkan/italian"];
+var markerRadius = 3;
 var lineSlant = [8,8]
 var initDesc = { title: "Timeline of WWI: major events",
 			     date: "June 1914 - June 1919"};
+var offsetBattles = ["Battle of Galicia","Siege of Przemysl",
+					 "Gallipoli Campaign","Battle of Transylvania"];
 
 var drag = d3.drag()
 .on("drag", dragged);
@@ -34,7 +36,7 @@ function getTime() {
 	return moveScale(timePos[0]);
 }
 
-var dial, year, gTimeline, gEvents, battleLine;
+var dial, year, gTimeline, gEvents, gBattlelines;
 var desc, gDesc, descLine1, descLine2;
 
 function showTime() {
@@ -73,7 +75,7 @@ function showTime() {
 	.attr("y", timeHeight-botMargin)
 	.text(getTime().getFullYear());
 
-	drawBattle();
+	drawBattlelines();
 	drawEvents();
 	drawDesc();
 	drawPlay();
@@ -122,9 +124,11 @@ function drawEvents() {
 		.attr("r", markerRadius*1.4);
 		d3.selectAll("circle.hover").classed("hover", false);
 		d3.select(this).classed("hover", true);
-		gDesc.select("rect").classed("event", true);
+		gDesc.select("rect").attr("class", "event");
 
-		desc.select("h3").text(d.name);
+		desc.select("h3").text(d.name)
+		.style("cursor", "pointer")
+		.on("click", function() { window.open(d.link); });
 		desc.select("p").text(d.date.getMonth()+1 + '/' +
 							  d.date.getDate() + '/' +
 							  d.date.getFullYear());
@@ -141,10 +145,12 @@ function drawEvents() {
 			d3.select(this).transition().duration(100)
 			.attr("r", markerRadius);
 			d3.select(this).classed("hover", false);
-			gDesc.select("rect").classed("event", false);
+			gDesc.select("rect").attr("class", "");
 			descLine1.classed("hidden", true);
 			descLine2.classed("hidden", true);
-			desc.select("h3").text(initDesc.title);
+			desc.select("h3").text(initDesc.title)
+			.style("cursor", "text")
+			.on("click", null);
 			desc.select("p").text(initDesc.date);
 		}
 	}
@@ -174,21 +180,66 @@ function drawEvents() {
 
 }
 
-function drawBattle() {
+function drawBattlelines() {
 
-	battleLine = gTimeline.append("line")
-	.attr("id", "battleLine")
-	.attr("class", "hidden");
+	gBattlelines = gTimeline.append("g").attr("class", "battlelines");
+
+	var showBattleDesc = function(d) {
+		d3.selectAll("circle.hover").classed("hover", false);
+		descLine1.classed("hidden", true);
+		descLine2.classed("hidden", true);
+		gDesc.select("rect").attr("class", "battle");
+		desc.select("h3").text(d.properties.name)
+		.style("cursor", "pointer")
+		.on("click", function() { window.open(d.properties.link); });
+		desc.select("p").text((d.properties.start.getMonth()+1) + '/' +
+							  d.properties.start.getDate() + '/' +
+							  d.properties.start.getFullYear() + ' - ' +
+							  (d.properties.end.getMonth()+1) + '/' +
+							  d.properties.end.getDate() + '/' +
+							  d.properties.end.getFullYear());
+	}
+
+	var lines = gBattlelines.selectAll("line").data(battles);
+	lines.enter()
+	.append("line")
+	.merge(lines)
+	.attr("x1", function(d) {
+		return timeScale(d.properties.start);
+	})
+	.attr("x2", function(d) {
+		return timeScale(d.properties.end);
+	})
+	.attr("y1", function(d) {
+		return slots[d.properties.position];
+	})
+	.attr("y2", function(d) {
+		return slots[d.properties.position];
+	})
+	.attr("transform", function(d) {
+		if (offsetBattles.includes(d.properties.name)) {
+			return "translate(0,3)"
+		}
+	})
+	.on("click", function(d) {
+		d3.selectAll("line.clicked").classed("clicked", false);
+		d3.select(this).classed("clicked", true);
+		gBattles.selectAll("path")
+		.classed("clicked", function(d1) {
+			return d.properties.name === d1.properties.name;
+		});
+		showBattleDesc(d);
+	});
 
 	gBattles.selectAll("path")
 	.on("click", function(d) {
 		d3.selectAll("path.clicked").classed("clicked", false);
 		d3.select(this).classed("clicked", true);
-		battleLine.classed("hidden", false)
-		.attr("x1", timeScale(d.properties.start))
-		.attr("x2", timeScale(d.properties.end))
-		.attr("y1", slots[d.properties.position])
-		.attr("y2", slots[d.properties.position]);
+		gBattlelines.selectAll("line")
+		.classed("clicked", function(d1) {
+			return d.properties.name === d1.properties.name;
+		});
+		showBattleDesc(d);
 	});
 
 }
@@ -267,11 +318,14 @@ function updateTime(duration) {
 		if (!flag) {
 			descLine1.classed("hidden", true);
 			descLine2.classed("hidden", true);
-			gDesc.select("rect").classed("event", false);
-			desc.select("h3").text(initDesc.title);
+			gDesc.select("rect").attr("class", "");
+			desc.select("h3").text(initDesc.title)
+			.style("cursor", "text")
+			.on("click", null);
 			desc.select("p").text(initDesc.date);
 		}
 	});
+
 	focus.classed("hidden", true);
 	year.text(time.getFullYear());
 
@@ -296,7 +350,8 @@ function updateTime(duration) {
 			return false;
 		}
 		return true;
-	});
+	})
+	.attr("opacity", time >= new Date("11/11/1918")? 0.5 : 1);
 
 }
 
@@ -327,7 +382,9 @@ function drawPlay() {
 	.on("click", function() {
 		timePos[0] = limits[0];
 		updateTime(100);
-	});
+	})
+	.append("title")
+	.text("back to start");
 	buttons.append("text")
 	.attr("x", 90)
 	.attr("y", timeHeight-15)
@@ -335,16 +392,18 @@ function drawPlay() {
 	.on("click", function() {
 		timePos[0] = limits[1];
 		updateTime(100);
-	});
+	})
+	.append("title")
+	.text("skip to end");;
 
 }
 
 function play() {          
 	setTimeout(function() {
 		timePos[0] = Math.max(timePos[0]-interval, limits[1]);
-		updateTime(10);
+		updateTime(20);
 		playing &= timePos[0] > limits[1];
 		if (playing) play();
 		else playButton.text('\uf04b');
-	}, 60);
+	}, 50);
 }

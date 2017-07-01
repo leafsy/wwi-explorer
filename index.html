@@ -25,20 +25,20 @@ text { fill: #fff; cursor: default; }
 -moz-@keyframes blinker { 50% { opacity: 0.6; } }
 -webkit-@keyframes blinker { 50% { opacity: 0.6; } }
 g.countriesB path { fill: #889; stroke: #555; }
-g.countriesB path.entente { fill: #66b; }
-g.countriesB path.central { fill: #c66; }
-g.countriesB path.defeated { fill: #a8a; }
-g.countriesB path._central { fill: #c88; }
+.entente { fill: #66b !important; }
+.central { fill: #c66 !important; }
+.defeated { fill: #a8a !important; }
+._central { fill: #c88 !important; }
 g.countriesA path { opacity: 0; stroke: none; }
 g.countriesA path.hover { fill: #444; opacity: 0.1; }
 g.rivers path { fill: none; stroke: #336; }
 g.cities circle { fill: #ddf; stroke: #444; }
 g.cities circle:hover { stroke: #222; }
 g.minor circle { stroke-width: 0.5px; }
-g.capital  circle { fill: #f33; }
+g.capital circle { fill: #f33; }
 g.front g path { fill: none; stroke: #f93; stroke-width: 2px; }
-g.battle path { cursor: pointer; fill: #ee9; fill-opacity: 0.3; }
-g.battle path:hover { fill-opacity: 0.4; }
+g.battle path { fill: #ee9; fill-opacity: 0.3; }
+#map g.battle path:hover { cursor: pointer; fill-opacity: 0.4; }
 g.battle path.clicked { stroke: #ee9; stroke-opacity: 0.5; }
 
 #dial { background: #111; }
@@ -53,17 +53,26 @@ g.battle path.clicked { stroke: #ee9; stroke-opacity: 0.5; }
 #playButtons text { cursor: pointer; font-size: 20px; }
 g.events circle { fill: #555; cursor: pointer; }
 g.events circle.hover { fill: #c63; stroke: #c63; stroke-width: 2px; }
-#battleLine { stroke: #c33; stroke-width: 2.5px; opacity: 0.6; }
+g.battlelines line { stroke: #333; stroke-width: 3px; opacity: 0.25; }
+g.battlelines line:hover { opacity: 0.4; cursor: pointer; }
+g.battlelines line.clicked { stroke: #c33; opacity: 0.5; }
 #eventDesc rect { fill: #bde; opacity: 0.95; stroke: #36c;
 				  stroke-width: 5px; stroke-dasharray: 0,280,90,0; }
-#eventDesc rect.event { fill: #edb; stroke: #c63; }
+rect.event { fill: #edb !important; stroke: #c63 !important; }
+rect.battle { fill: #ecb !important; stroke: #d42 !important; }
 #eventDesc foreignObject h3 { margin: 0 0 5px; line-height: 90%; }
 #eventDesc foreignObject p { margin: 0; text-align: right; }
 #eventDesc line { stroke: #c63; stroke-width: 2px; }
 
 #info { background: #aaa; }
 #legendTab * { cursor: pointer }
-#legendTab rect, #legendBox rect { fill: #333; }
+rect.legendBkgrd { fill: #2a2a2a !important; stroke: none !important; }
+#legendBox rect { fill: #889; stroke: #555; }
+#legendBox text { dominant-baseline: hanging; }
+#legendBox text.auxillary { font-size: 12px; }
+g.checkbox { cursor: pointer; }
+g.checkbox rect { fill: #fff !important; }
+g.checkbox path { fill: none; stroke: #222; stroke-width: 2.5px; }
 
 </style>
 </head>
@@ -78,13 +87,12 @@ g.events circle.hover { fill: #c63; stroke: #c63; stroke-width: 2px; }
 
 var countries, rivers, cities, alliances, fronts;
 var events, battles;
-var numFiles = 5;
 
 d3.queue()
 .defer(d3.json, "data/europe_1914.geojson")
 .defer(d3.json, "data/europe_rivers.json")
 .defer(d3.csv, "data/cities.csv")
-.defer(d3.tsv, "data/events.csv")
+.defer(d3.tsv, "data/events.tsv")
 .defer(d3.json, "data/status.json")
 .defer(d3.json, "data/battles.geojson")
 .defer(d3.json, "data/front_b.geojson")
@@ -131,7 +139,7 @@ d3.queue()
 	battles.forEach(function(b) {
 		b.properties.start = new Date(b.properties.start);
 		var end = new Date(b.properties.end);
-		end.setDate(end.getDate()+1);
+		end.setHours(end.getHours()+1);;
 		b.properties.end = end;
 	});
 	fronts = [];

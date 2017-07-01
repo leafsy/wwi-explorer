@@ -7,7 +7,8 @@
         "name":"Battle of the Frontiers",
         "start":"8/7/1914",
         "end":"8/24/1914",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_the_Frontiers"
       },
       "geometry": {
         "type": "Polygon",
@@ -59,7 +60,8 @@
         "name":"Siege of Antwerp",
         "start":"8/24/1914",
         "end":"10/10/1914",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Siege_of_Antwerp_(1914)"
       },
       "geometry": {
         "type": "Polygon",
@@ -95,7 +97,8 @@
         "name":"First Battle of the Marne",
         "start":"9/6/1914",
         "end":"9/12/1914",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/First_Battle_of_the_Marne"
       },
       "geometry": {
         "type": "Polygon",
@@ -131,7 +134,8 @@
         "name":"First Battle of the Aisne",
         "start":"9/13/1914",
         "end":"9/28/1914",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/First_Battle_of_the_Aisne"
       },
       "geometry": {
         "type": "Polygon",
@@ -167,7 +171,8 @@
         "name":"First Battle of Champagne",
         "start":"12/20/1914",
         "end":"3/17/1915",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/First_Battle_of_Champagne"
       },
       "geometry": {
         "type": "Polygon",
@@ -203,7 +208,8 @@
         "name":"Battle of Verdun",
         "start":"2/21/1916",
         "end":"12/18/1916",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Verdun"
       },
       "geometry": {
         "type": "Polygon",
@@ -239,7 +245,8 @@
         "name":"Battle of the Somme",
         "start":"7/1/1916",
         "end":"11/18/1916",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_the_Somme"
       },
       "geometry": {
         "type": "Polygon",
@@ -275,7 +282,8 @@
         "name":"Second Battle of the Aisne",
         "start":"4/16/1917",
         "end":"5/9/1917",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_the_Aisne"
       },
       "geometry": {
         "type": "Polygon",
@@ -311,7 +319,8 @@
         "name": "Battle of Arras",
         "start": "4/9/1917",
         "end": "5/16/1917",
-        "position": 1
+        "position": 0,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Arras_(1917)"
       },
       "geometry": {
         "type": "Polygon",
@@ -347,7 +356,8 @@
         "name":"Battle of Messines",
         "start":"6/7/1917",
         "end":"6/14/1917",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Messines_(1917)"
       },
       "geometry": {
         "type": "Polygon",
@@ -383,7 +393,8 @@
         "name":"Battle of Passchendaele",
         "start":"7/31/1917",
         "end":"11/10/1917",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Passchendaele"
       },
       "geometry": {
         "type": "Polygon",
@@ -419,7 +430,8 @@
         "name":"Second Battle of the Somme",
         "start":"8/21/1918",
         "end":"9/2/1918",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_the_Somme_(1918)"
       },
       "geometry": {
         "type": "Polygon",
@@ -455,7 +467,8 @@
         "name":"Battle of St Quentin Canal",
         "start":"9/29/1918",
         "end":"10/10/1918",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_St_Quentin_Canal"
       },
       "geometry": {
         "type": "Polygon",
@@ -491,7 +504,8 @@
         "name":"Second Battle of the Marne",
         "start":"7/15/1918",
         "end":"8/6/1918",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_the_Marne"
       },
       "geometry": {
         "type": "Polygon",
@@ -527,7 +541,8 @@
         "name": "Battle of Asiago",
         "start": "5/15/1916",
         "end": "6/10/1916",
-        "position": 3
+        "position": 3,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Asiago"
       },
       "geometry": {
         "type": "Polygon",
@@ -563,7 +578,8 @@
         "name": "Sixth Battle of the Isonzo",
         "start": "8/6/1916",
         "end": "8/17/1916",
-        "position": 3
+        "position": 3,
+        "link":"https://en.wikipedia.org/wiki/Sixth_Battle_of_the_Isonzo"
       },
       "geometry": {
         "type": "Polygon",
@@ -596,46 +612,11 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Tenth Battle of the Isonzo",
-        "start": "5/10/1917",
-        "end": "6/8/1917",
-        "position": 3
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              14.0372802734375,
-              46.48893804576338
-            ],
-            [
-              13.94114990234375,
-              45.775186183521036
-            ],
-            [
-              13.294580078125,
-              45.784763729573555
-            ],
-            [
-              13.3000732421875,
-              46.50784482789971
-            ],
-            [
-              14.0372802734375,
-              46.48893804576338
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name":"Battle of Caporetto",
         "start":"10/24/1917",
         "end":"11/19/1917",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Caporetto"
       },
       "geometry": {
         "type": "Polygon",
@@ -675,7 +656,8 @@
         "name":"Second Battle of the Piave River",
         "start":"6/15/1918",
         "end":"6/23/1918",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_the_Piave_River"
       },
       "geometry": {
         "type": "Polygon",
@@ -711,7 +693,8 @@
         "name":"Battle of Vittorio Veneto",
         "start":"10/24/1918",
         "end":"11/3/1918",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Vittorio_Veneto"
       },
       "geometry": {
         "type": "Polygon",
@@ -747,7 +730,8 @@
         "name":"Battle of Tannenberg",
         "start":"8/26/1914",
         "end":"8/30/1914",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Tannenberg"
       },
       "geometry": {
         "type": "Polygon",
@@ -783,7 +767,8 @@
         "name":"First Battle of the Masurian Lakes",
         "start":"9/7/1914",
         "end":"9/14/1914",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/First_Battle_of_the_Masurian_Lakes"
       },
       "geometry": {
         "type": "Polygon",
@@ -819,7 +804,8 @@
         "name":"Second Battle of the Masurian Lakes",
         "start":"2/7/1915",
         "end":"2/22/1915",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_the_Masurian_Lakes"
       },
       "geometry": {
         "type": "Polygon",
@@ -855,7 +841,8 @@
         "name":"Battle of the Vistula River",
         "start":"9/29/1914",
         "end":"10/31/1914",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_the_Vistula_River"
       },
       "geometry": {
         "type": "Polygon",
@@ -891,7 +878,8 @@
         "name":"Battle of Lodz",
         "start":"11/11/1914",
         "end":"12/6/1914",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_%C5%81%C3%B3d%C5%BA_(1914)"
       },
       "geometry": {
         "type": "Polygon",
@@ -927,7 +915,8 @@
         "name":"Battle of Galicia",
         "start":"8/23/1914",
         "end":"9/11/1914",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Galicia"
       },
       "geometry": {
         "type": "Polygon",
@@ -960,46 +949,11 @@
     {
       "type": "Feature",
       "properties": {
-        "name":"Siege of Przemysl",
-        "start":"9/23/1914",
-        "end":"3/22/1915",
-        "position":2
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              22.4615478515625,
-              49.96182229868413
-            ],
-            [
-              22.966918945312496,
-              49.89463439573421
-            ],
-            [
-              22.9229736328125,
-              49.66051672522669
-            ],
-            [
-              22.3956298828125,
-              49.72092792670335
-            ],
-            [
-              22.4615478515625,
-              49.96182229868413
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name":"Brusilov Offensive",
         "start":"6/4/1916",
         "end":"9/20/1916",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Brusilov_Offensive"
       },
       "geometry": {
         "type": "Polygon",
@@ -1035,7 +989,8 @@
         "name":"Battle of Transylvania",
         "start":"8/27/1916",
         "end":"10/25/1916",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Transylvania"
       },
       "geometry": {
         "type": "Polygon",
@@ -1071,7 +1026,8 @@
         "name":"Battle of Bucharest",
         "start":"11/27/1916",
         "end":"12/6/1916",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Bucharest"
       },
       "geometry": {
         "type": "Polygon",
@@ -1107,7 +1063,8 @@
         "name":"Battle of Marasesti",
         "start":"8/6/1917",
         "end":"9/8/1917",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_M%C4%83r%C4%83%C8%99e%C8%99ti"
       },
       "geometry": {
         "type": "Polygon",
@@ -1143,7 +1100,8 @@
         "name":"Lake Naroch Offensive",
         "start":"3/18/1916",
         "end":"3/30/1916",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Lake_Naroch_Offensive"
       },
       "geometry": {
         "type": "Polygon",
@@ -1179,7 +1137,8 @@
         "name":"Kerensky Offensive",
         "start":"7/1/1917",
         "end":"7/19/1917",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Kerensky_Offensive"
       },
       "geometry": {
         "type": "Polygon",
@@ -1215,7 +1174,8 @@
         "name":"Battle of Cer",
         "start":"8/15/1914",
         "end":"8/24/1914",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Cer"
       },
       "geometry": {
         "type": "Polygon",
@@ -1251,7 +1211,8 @@
         "name":"Battle of Kolubara",
         "start":"11/16/1914",
         "end":"12/16/1914",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Kolubara"
       },
       "geometry": {
         "type": "Polygon",
@@ -1287,7 +1248,8 @@
         "name":"Kosovo Offensive",
         "start":"11/10/1915",
         "end":"12/4/1915",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Kosovo_Offensive_(1915)"
       },
       "geometry": {
         "type": "Polygon",
@@ -1323,7 +1285,8 @@
         "name":"Gallipoli Campaign",
         "start":"4/25/1915",
         "end":"1/9/1916",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Gallipoli_Campaign"
       },
       "geometry": {
         "type": "Polygon",
@@ -1355,7 +1318,8 @@
         "name":"Second Battle of Ypres",
         "start":"4/22/1915",
         "end":"5/25/1915",
-        "position":1
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_Ypres"
       },
       "geometry": {
         "type": "Polygon",
@@ -1391,7 +1355,8 @@
         "name":"Second Battle of Artois",
         "start":"5/9/1915",
         "end":"6/18/1915",
-        "position":0
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_Artois"
       },
       "geometry": {
         "type": "Polygon",
@@ -1427,7 +1392,8 @@
         "name":"Loos-Artois Offensive",
         "start":"9/25/1915",
         "end":"10/13/1915",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Third_Battle_of_Artois"
       },
       "geometry": {
         "type": "Polygon",
@@ -1463,7 +1429,8 @@
         "name":"Second Battle of Champagne",
         "start":"9/25/1915",
         "end":"11/6/1915",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Second_Battle_of_Champagne"
       },
       "geometry": {
         "type": "Polygon",
@@ -1499,7 +1466,8 @@
         "name":"First Battle of Ypres",
         "start":"10/19/1914",
         "end":"11/22/1914",
-        "position":1
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/First_Battle_of_Ypres"
       },
       "geometry": {
         "type": "Polygon",
@@ -1535,7 +1503,8 @@
         "name":"Battle of Cambrai",
         "start":"11/20/1917",
         "end":"12/7/1917",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Cambrai_(1917)"
       },
       "geometry": {
         "type": "Polygon",
@@ -1571,7 +1540,8 @@
         "name":"Operation Michael",
         "start":"3/21/1918",
         "end":"4/5/1918",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Operation_Michael"
       },
       "geometry": {
         "type": "Polygon",
@@ -1607,7 +1577,8 @@
         "name":"Battle of the Lys",
         "start":"4/7/1918",
         "end":"4/30/1918",
-        "position":1
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_the_Lys_(1918)"
       },
       "geometry": {
         "type": "Polygon",
@@ -1643,7 +1614,8 @@
         "name":"Third Battle of the Aisne",
         "start":"5/27/1918",
         "end":"6/6/1918",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Third_Battle_of_the_Aisne"
       },
       "geometry": {
         "type": "Polygon",
@@ -1679,7 +1651,8 @@
         "name":"Battle of Amiens",
         "start":"8/8/1918",
         "end":"8/12/1918",
-        "position":0
+        "position":0,
+        "link":"https://en.wikipedia.org/wiki/Battle_of_Amiens_(1918)"
       },
       "geometry": {
         "type": "Polygon",
@@ -1712,54 +1685,19 @@
     {
       "type": "Feature",
       "properties": {
-        "name":"Battle of Saint-Mihiel",
-        "start":"9/12/1918",
-        "end":"9/16/1918",
-        "position":0
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              5.38055419921875,
-              49.023461463214126
-            ],
-            [
-              5.77056884765625,
-              49.00364573861305
-            ],
-            [
-              5.76507568359375,
-              48.76886223397753
-            ],
-            [
-              5.372314453125,
-              48.785151998043155
-            ],
-            [
-              5.38055419921875,
-              49.023461463214126
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name":"Meuse-Argonne Offensive",
         "start":"9/26/1918",
         "end":"11/11/1918",
-        "position":0
+        "position":1,
+        "link":"https://en.wikipedia.org/wiki/Meuse-Argonne_Offensive"
       },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
           [
             [
-              4.7076416015625,
-              49.57866438815706
+              4.6076416015625,
+              49.77866438815706
             ],
             [
               5.869445800781249,
@@ -1774,8 +1712,8 @@
               49.08466020484928
             ],
             [
-              4.7076416015625,
-              49.57866438815706
+              4.6076416015625,
+              49.77866438815706
             ]
           ]
         ]
@@ -1787,7 +1725,8 @@
         "name":"Gorlice–Tarnow Offensive",
         "start":"5/2/1915",
         "end":"6/22/1915",
-        "position":2
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Gorlice%E2%80%93Tarn%C3%B3w_Offensive"
       },
       "geometry": {
         "type": "Polygon",
@@ -1827,7 +1766,8 @@
         "name":"Monastir Offensive",
         "start":"9/12/1916",
         "end":"12/1/1916",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Monastir_Offensive"
       },
       "geometry": {
         "type": "Polygon",
@@ -1863,7 +1803,8 @@
         "name":"Vardar Offensive",
         "start":"9/15/1918",
         "end":"9/29/1918",
-        "position":3
+        "position":3,
+        "link":"https://en.wikipedia.org/wiki/Vardar_Offensive"
       },
       "geometry": {
         "type": "Polygon",
@@ -1888,6 +1829,43 @@
             [
               20.98388671875,
               40.713955826286046
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name":"Siege of Przemysl",
+        "start":"9/23/1914",
+        "end":"3/22/1915",
+        "position":2,
+        "link":"https://en.wikipedia.org/wiki/Siege_of_Przemy%C5%9Bl"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              22.4615478515625,
+              49.96182229868413
+            ],
+            [
+              22.966918945312496,
+              49.89463439573421
+            ],
+            [
+              22.9229736328125,
+              49.66051672522669
+            ],
+            [
+              22.3956298828125,
+              49.72092792670335
+            ],
+            [
+              22.4615478515625,
+              49.96182229868413
             ]
           ]
         ]
