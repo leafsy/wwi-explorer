@@ -125,6 +125,32 @@ function drawLegendContent(g) {
 	.attr("y", currentY)
 	.attr("width", 40)
 	.attr("height", 15);
+	g.append("text")
+	.attr("x", legendTextX)
+	.attr("y", currentY += legendPadding)
+	.text("Pre-war borders");
+	g.append("g")
+	.attr("class", "countriesB")
+	.attr("transform", "translate("+[legendMargin,currentY]+")")
+	.append("path")
+	.attr("d", "M0,7 L40,7 Z");
+	g.append("text")
+	.attr("x", legendTextX)
+	.attr("y", currentY += legendPadding)
+	.text("Post-war borders");
+	g.append("g")
+	.attr("class", "bordersAf")
+	.attr("transform", "translate("+[legendMargin,currentY]+")")
+	.append("path")
+	.attr("d", "M0,7 L40,7 Z");
+	g.append("text")
+	.attr("x", legendTextX)
+	.attr("y", currentY += legendPadding)
+	.text("New Countries");
+	g.append("path")
+	.attr("class", "newCountry")
+	.attr("transform", "translate("+[legendMargin,currentY]+")")
+	.attr("d", "M0,0 L40,0 L40,14 L0,14 Z");
 
 	g.append("text")
 	.attr("x", legendMargin)
@@ -232,15 +258,6 @@ function drawLegendContent(g) {
 	.attr("transform", "translate("+[legendMargin,currentY]+")")
 	.append("path")
 	.attr("d", "M0,0 L40,0 L40,14 L0,14 Z");
-	g.append("text")
-	.attr("x", legendTextX)
-	.attr("y", currentY += legendPadding)
-	.text("Pre-war borders");
-	g.append("g")
-	.attr("class", "countriesB")
-	.attr("transform", "translate("+[legendMargin,currentY]+")")
-	.append("path")
-	.attr("d", "M0,7 L40,7 Z");
 
 }
 

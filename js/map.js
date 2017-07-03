@@ -28,7 +28,8 @@ projection.translate(initT);
 projection.scale(initS);
 var pathGenerator = d3.geoPath().projection(projection);
 
-var map, gCountriesB, gCountriesA, gRivers, gCities, gFronts, gBattles;
+var map, gCountriesB, gCountriesA, gCountriesAf, gBordersAf;
+var gRivers, gCities, gFronts, gBattles;
 var focus, gLabel, gCLabel;
 
 function showMap() {
@@ -48,6 +49,7 @@ function showMap() {
 
 	drawCountriesBelow();
 	drawCountriesAbove();
+	drawCountriesAfter();
 	//drawRivers();
 	drawFronts();
 	drawBattles();
@@ -108,6 +110,51 @@ function drawCountriesAbove() {
 		gLabel.select("rect")
 		.attr("width", label.getBBox().width + 2*labelMargin);
 	});
+
+}
+
+function drawCountriesAfter() {
+
+	gCountriesAf = map.append("g").attr("class", "countriesA hidden");
+
+	var newCountries = ["Republic of Finland",
+						"Republic of Estonia",
+						"Republic of Latvia",
+						"Republic of Lithuania",
+						"Republic of Poland",
+						"First Czechoslovak Republic",
+						"First Austrian Republic",
+						"Kingdom of Hungary",
+						"Kingdom of Yugoslavia",
+						"Republic of Turkey",
+						"Soviet Russia (Civil War)"];
+
+	var paths = gCountriesAf.selectAll("path").data(countries2);
+	paths.enter()
+	.append("path")
+	.merge(paths)
+	.attr("class", function(d) {
+		if (newCountries.includes(d.properties.country)) {
+			return "newCountry";
+		}
+	})
+	.attr("d", pathGenerator)
+	.on("mouseover", function(d) {
+		d3.selectAll("path.hover").classed("hover", false);
+		d3.select(this).classed("hover", true);
+		gLabel.classed("hidden", false);
+		gLabel.select("text").text(d.properties.country);
+		var label = gLabel.select("text").nodes()[0];
+		gLabel.select("rect")
+		.attr("width", label.getBBox().width + 2*labelMargin);
+	});
+
+	gBordersAf = map.append("g").attr("class", "bordersAf hidden");
+	var lines = gBordersAf.selectAll("path").data(borders2);
+	lines.enter()
+	.append("path")
+	.merge(lines)
+	.attr("d", pathGenerator);
 
 }
 
@@ -268,6 +315,8 @@ function redraw() {
 	t.x = Math.min(0, Math.max(mapWidth * (1-t.k), t.x));
 	t.y = Math.min(0, Math.max(mapHeight * (1-t.k), t.y));
 	gCountriesA.attr("transform", t);
+	gCountriesAf.attr("transform", t);
+	gBordersAf.attr("transform", t);
 	gCountriesB.attr("transform", t);
 	focus.attr("transform", t)
 	.attr("r", focusRadius/t.k)

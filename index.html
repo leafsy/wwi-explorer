@@ -31,6 +31,9 @@ g.countriesB path { fill: #889; stroke: #555; }
 ._central { fill: #c88 !important; }
 g.countriesA path { opacity: 0; stroke: none; }
 g.countriesA path.hover { fill: #444; opacity: 0.1; }
+path.newCountry { fill: #955; opacity: 0.2 !important; }
+path.newCountry.hover { fill: #733 !important; }
+g.bordersAf path { fill: none; stroke: #955; stroke-width: 1.5px; }
 g.rivers path { fill: none; stroke: #336; }
 g.cities circle { fill: #ddf; stroke: #444; }
 g.cities circle:hover { stroke: #222; }
@@ -85,11 +88,13 @@ g.checkbox path { fill: none; stroke: #222; stroke-width: 2.5px; }
 
 <script>
 
-var countries, rivers, cities, alliances, fronts;
-var events, battles;
+var countries, countries2, borders2, rivers, cities, alliances;
+var fronts, events, battles;
 
 d3.queue()
 .defer(d3.json, "data/europe_1914.geojson")
+.defer(d3.json, "data/europe_1919.geojson")
+.defer(d3.json, "data/europe_1919b.geojson")
 .defer(d3.json, "data/europe_rivers.json")
 .defer(d3.csv, "data/cities.csv")
 .defer(d3.tsv, "data/events.tsv")
@@ -100,7 +105,7 @@ d3.queue()
 .defer(d3.json, "data/front_w.geojson")
 .defer(d3.json, "data/front_e.geojson")
 .defer(d3.json, "data/front_r.geojson")
-.await(function (error, ctry, rvr, cty, evt, sts, bat,
+.await(function (error, ctry, ctry2, bd2, rvr, cty, evt, sts, bat,
 						bft, ift, wft, eft, rft) {
 	if (error) { console.log(error); }
 
@@ -109,6 +114,12 @@ d3.queue()
 		c.properties.dates = [];
 		c.properties.status = [];
 	});
+	countries2 = ctry2.features;
+	countries2.forEach(function(c) {
+		c.properties.dates = [];
+		c.properties.status = [];
+	});
+	borders2 = bd2.features;
 	rivers = rvr;
 	cities = [];
 	cty.forEach(function(c) {

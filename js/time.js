@@ -15,7 +15,7 @@ var slots = [-60,-44,-28,-12];
 var slotLabels = ["western/other","western","eastern","balkan/italian"];
 var markerRadius = 3;
 var lineSlant = [8,8]
-var initDesc = { title: "Timeline of WWI: major events",
+var initDesc = { title: "Interactive timeline of WWI: major events and battles",
 			     date: "June 1914 - June 1919"};
 var offsetBattles = ["Battle of Galicia","Siege of Przemysl",
 					 "Gallipoli Campaign","Battle of Transylvania"];
@@ -352,6 +352,9 @@ function updateTime(duration) {
 		return true;
 	})
 	.attr("opacity", time >= new Date("11/11/1918")? 0.5 : 1);
+
+	gCountriesAf.classed("hidden", time < new Date("6/28/1919"));
+	gBordersAf.classed("hidden", time < new Date("6/28/1919"));
 
 }
 
