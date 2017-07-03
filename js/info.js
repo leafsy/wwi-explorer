@@ -7,8 +7,13 @@ var legendWidth = infoWidth-legendTabWidth;
 var legendMargin = 30;
 var legendPadding = 25;
 var legendTextX = 90;
+var pageMargin = 22;
+var tabHeight = 30;
+var tabMargin = 5;
+var tabPos = [60, 115, 185];
+var topics = ["Intro", "People", "Casualties"];
 
-var gLegend;
+var gLegend, gPages, gTabs;
 
 function showInfo() {
 
@@ -16,7 +21,65 @@ function showInfo() {
 	.attr("width", infoWidth)
 	.attr("height", infoHeight);
 
+	drawPages();
 	drawLegend();
+
+}
+
+function drawPages() {
+
+	gPages = info.append("g")
+	.attr("transform", "translate("+[pageMargin,
+									 pageMargin/2+tabHeight]+")");
+
+	var pages = gPages.selectAll("g").data([0,1,2]);
+	pages.enter()
+	.append("g")
+	.merge(pages)
+	.attr("class", "page")
+	.classed("hidden", function(d) { return d; });
+
+	drawTabs();
+
+	d3.selectAll("g.page")
+	.append("rect")
+	.attr("width", infoWidth-2*pageMargin)
+	.attr("height", infoHeight-pageMargin-tabHeight);
+
+}
+
+function drawTabs() {
+
+	gTabs = info.append("g")
+	.attr("transform", "translate("+[0,pageMargin/2]+")");
+
+	var tabs = gTabs.selectAll("g").data([0,1,2]);
+	var tab = tabs.enter()
+	.append("g")
+	.merge(tabs)
+	.attr("class", "tab")
+	.classed("selected", function(d) { return !d; })
+	.attr("transform", function(d) {
+		return "translate("+[tabPos[d],0]+")";
+	})
+	.on("click", function(d) {
+		d3.selectAll("g.tab").classed("selected", false);
+		d3.select(this).classed("selected", true);
+		d3.selectAll("g.page").classed("hidden", function(d1) {
+			return d !== d1;
+		});
+	});
+	tab.append("rect")
+	.attr("height", tabHeight)
+	.attr("width", function(d) {
+		if (d === tabPos.length-1) {
+			return infoWidth-pageMargin-tabPos[d]-tabMargin;
+		}
+		return tabPos[d+1]-tabPos[d]-tabMargin;
+	});
+	tab.append("text")
+	.attr("transform", "translate("+[8,8]+")")
+	.text(function(d) { return topics[d]; });
 
 }
 
@@ -262,31 +325,31 @@ function drawLegendContent(g) {
 }
 
 // obsolete:
-var extensionWidth = descWidth-2*descMargin;
-var extensionHeight = 250;
-var gExtension;
+// var extensionWidth = descWidth-2*descMargin;
+// var extensionHeight = 250;
+// var gExtension;
 
-function drawExtension() {
+// function drawExtension() {
 
-	gExtension = info.append("g")
-	.attr("id", "extentDesc");
-	gExtension.append("rect")
-	.attr("x", descMargin)
-	.attr("y", infoHeight)
-	.attr("width", extensionWidth)
-	.attr("height", extensionHeight);
+// 	gExtension = info.append("g")
+// 	.attr("id", "extentDesc");
+// 	gExtension.append("rect")
+// 	.attr("x", descMargin)
+// 	.attr("y", infoHeight)
+// 	.attr("width", extensionWidth)
+// 	.attr("height", extensionHeight);
 
-	gDesc.on("mouseover", function() {
-		var cl = gDesc.select("rect").attr("class");
-		if (!cl) return;
-		gExtension.select("rect").attr("class", cl);
-		gExtension.transition()
-		.attr("transform", "translate("+[0,-extensionHeight]+")");
-	}).on("mouseout", function() {
-		gExtension.transition()
-		.attr("transform", "translate(0,0)");
-	});
-	gExtension.on("mouseover", gDesc.on("mouseover"))
-	.on("mouseout", gDesc.on("mouseout"));
+// 	gDesc.on("mouseover", function() {
+// 		var cl = gDesc.select("rect").attr("class");
+// 		if (!cl) return;
+// 		gExtension.select("rect").attr("class", cl);
+// 		gExtension.transition()
+// 		.attr("transform", "translate("+[0,-extensionHeight]+")");
+// 	}).on("mouseout", function() {
+// 		gExtension.transition()
+// 		.attr("transform", "translate(0,0)");
+// 	});
+// 	gExtension.on("mouseover", gDesc.on("mouseover"))
+// 	.on("mouseout", gDesc.on("mouseout"));
 
-}
+// }
