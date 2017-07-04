@@ -117,26 +117,20 @@ function drawCountriesAfter() {
 
 	gCountriesAf = map.append("g").attr("class", "countriesA hidden");
 
-	var newCountries = ["Republic of Finland",
-						"Republic of Estonia",
-						"Republic of Latvia",
-						"Republic of Lithuania",
-						"Republic of Poland",
-						"First Czechoslovak Republic",
-						"First Austrian Republic",
-						"Kingdom of Hungary",
-						"Kingdom of Yugoslavia",
-						"Republic of Turkey",
-						"Soviet Russia (Civil War)"];
+	var newCountries = ["Finland","Estonia","Latvia","Lithuania",
+						"Polish","Czechoslovak","Austrian","Hungary",
+						"Yugoslavia","Turkey","Soviet"];
 
 	var paths = gCountriesAf.selectAll("path").data(countries2);
 	paths.enter()
 	.append("path")
 	.merge(paths)
 	.attr("class", function(d) {
-		if (newCountries.includes(d.properties.country)) {
-			return "newCountry";
-		}
+		var found = false;
+		newCountries.forEach(function(s) {
+			if (d.properties.country.includes(s)) found = true;
+		});
+		if (found) return "newCountry";
 	})
 	.attr("d", pathGenerator)
 	.on("mouseover", function(d) {
