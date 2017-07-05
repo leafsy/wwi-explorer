@@ -16,7 +16,7 @@ var slotLabels = ["western/other","western","eastern","balkan/italian"];
 var markerRadius = 3;
 var lineSlant = [8,8]
 var initDesc = { title: "Interactive timeline of WWI: major events and battles",
-			     date: "June 1914 - June 1919"};
+			     date: "An infographic by Steven Ye"};
 var offsetBattles = ["Battle of Galicia","Siege of Przemysl",
 					 "Gallipoli Campaign","Battle of Transylvania"];
 

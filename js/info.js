@@ -7,13 +7,31 @@ var legendWidth = infoWidth-legendTabWidth;
 var legendMargin = 30;
 var legendPadding = 25;
 var legendTextX = 90;
-var pageMargin = 22;
 var tabHeight = 30;
 var tabMargin = 5;
 var tabPos = [60, 115, 185];
 var topics = ["Intro", "People", "Casualties"];
+var pageMargin = 22;
+var pageWidth = infoWidth-2*pageMargin;
+var pageHeight = infoHeight-pageMargin-tabHeight;
+var contentPadding = 20;
+
+var introText = [
+	["h3","Overview"],
+	["p","One hundred years ago, Europe was embroiled in a conflag-ration of unprecedented scale. It started with an assassination and ended with the loss of 15 million lives; it gave birth to weapons of unspeakable horror and left behind a generation thirsting for revenge; it shatter-ed old empires and, from their ashes, ushered in the modern age. The Great War was the seminal catastrophe of the 20th century, and we can learn much about the world we find our-selves in today by studying events that took place a hun-dred years prior."],
+	["p","This project aims to present important events and battles of the war by placing them in time as well as space. It covers the pivotal five years between June 1914 and June 1919 on the European continent, with em-phasis placed on military and political history. The project serves mainly as a portal with links to information about the Western, Eastern, Balkan/Mace-donian (including Gallipoli) and Italian Fronts."],
+	["p","(Note: 1914 borders are used throughout the course of the war and may not represent comtemporary demarcations.)"],
+	["h3","How to Use"],
+	["ul", ["Zoom in on map for details of cities and borders;",
+			"Scroll, drag, or hit the play button to travel along the timeline;",
+			"See the evolution of frontlines and alliances;",
+			"Click on event descriptions to get more information;",
+			"Change visibility of map layers in the legend;",
+			"View important figures and casualties data"]]
+	];
 
 var gLegend, gPages, gTabs;
+var introContent;
 
 function showInfo() {
 
@@ -37,14 +55,17 @@ function drawPages() {
 	.append("g")
 	.merge(pages)
 	.attr("class", "page")
-	.classed("hidden", function(d) { return d; });
-
-	drawTabs();
+	.classed("hidden", function(d) { return d; })
+	.append("rect")
+	.attr("width", pageWidth)
+	.attr("height", pageHeight);
 
 	d3.selectAll("g.page")
-	.append("rect")
-	.attr("width", infoWidth-2*pageMargin)
-	.attr("height", infoHeight-pageMargin-tabHeight);
+	.each(function(d) {
+		if (d === 0) return fillIntro(d3.select(this));
+	});;
+
+	drawTabs();
 
 }
 
@@ -80,6 +101,28 @@ function drawTabs() {
 	tab.append("text")
 	.attr("transform", "translate("+[8,8]+")")
 	.text(function(d) { return topics[d]; });
+
+}
+
+function fillIntro(page) {
+
+	introContent = page.append("foreignObject")
+	.attr("x", contentPadding-3)
+	.attr("y", contentPadding)
+	.append("xhtml:div")
+	.attr("xmln", "http://www.w3.org/1999/xhtml")
+	.style("width", pageWidth-2*contentPadding)
+	.style("height", pageHeight-2*contentPadding);
+	introText.forEach(function(t) {
+		var element = introContent.append("xhtml:"+t[0]);
+		if (t[0] === "ul") {
+			t[1].forEach(function(l) {
+				element.append("xhtml:li").text(l);
+			});
+		} else {
+			element.text(t[1]);
+		}
+	});
 
 }
 
