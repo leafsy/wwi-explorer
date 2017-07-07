@@ -248,7 +248,7 @@ function updateGraph(d) {
 	})
 	.select("title")
 	.text(function(d1) {
-		return Math.round(currentCasualties[d][d1]/100)*100;
+		return d1+": "+Math.round(currentCasualties[d][d1]/100)*100;
 	});
 
 }

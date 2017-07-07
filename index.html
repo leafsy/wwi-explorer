@@ -14,6 +14,7 @@
 body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
 .hidden,.inactive { display: none; }
 text { fill: #fff; cursor: default; }
+#loadscreen { width: 1000px; height: 680px; position: fixed; }
 
 #map { background: #334; }
 .label rect { fill: #000; opacity: 0.6; }
@@ -111,6 +112,8 @@ g.axis text { fill: #333; opacity: 0.8; }
 
 <body>
 
+<img id="loadscreen" src="images/loading.png" alt="Loading...">
+
    <svg id="map"></svg><!--
 --><svg id="info"></svg><!--
 --><svg id="dial"></svg>
@@ -201,6 +204,12 @@ d3.queue()
 	showMap();
 	showTime();
 	showInfo();
+
+	d3.select("#loadscreen").transition().duration(300)
+	.style("opacity", 0);
+	setTimeout(function() {
+		d3.select("#loadscreen").classed("hidden", true);
+	}, 300);
 
 });
 
