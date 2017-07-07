@@ -15,6 +15,10 @@ var pageMargin = 22;
 var pageWidth = infoWidth-2*pageMargin;
 var pageHeight = infoHeight-pageMargin-tabHeight;
 var contentPadding = 20;
+var graphWidth = 210;
+var graphHeight = 340;
+var graphBarWidth = 10;
+var maxCasualties = 9500000;
 
 var introText = [
 	["h3","Overview"],
@@ -29,9 +33,12 @@ var introText = [
 			"Change visibility of map layers in the legend;",
 			"View important figures and casualties data"]]
 	];
+var frontCategories = ["Western", "Eastern", "Italian", "Balkans"];
+var centralCountries = ["Germany", "Austria", "Turkey", "Bulgaria"];
 
 var gLegend, gPages, gTabs;
 var introContent;
+var gFrontButtons, gFrontGraphs;
 
 function showInfo() {
 
@@ -63,6 +70,7 @@ function drawPages() {
 	d3.selectAll("g.page")
 	.each(function(d) {
 		if (d === 0) return fillIntro(d3.select(this));
+		if (d === 2) return fillCasualties(d3.select(this));
 	});;
 
 	drawTabs();
@@ -122,6 +130,125 @@ function fillIntro(page) {
 		} else {
 			element.text(t[1]);
 		}
+	});
+
+}
+
+function fillCasualties(page) {
+
+	gFrontButtons = page.append("g")
+	.attr("id", "frontButtons")
+	.attr("transform", "translate("+[contentPadding,contentPadding]+")");
+
+	var mouseclick = function(d) {
+		d3.selectAll("text.selected").classed("selected", false);
+		d3.select(this).classed("selected", true);
+		d3.selectAll(".graph").classed("hidden", function(d1) {
+			return d !== d1;
+		});
+	}
+
+	var buttons = gFrontButtons.selectAll("text").data(frontCategories);
+	buttons.enter()
+	.append("text")
+	.merge(buttons)
+	.attr("class", function(d) { return d; })
+	.classed("selected", function(d) {
+		return d === frontCategories[0];
+	})
+	.attr("transform", function(d) {
+		var i = frontCategories.indexOf(d);
+		return "translate("+[i*62-(i>1)*6-(i>2)*12,0]+")";
+	})
+	.on("click", mouseclick)
+	.text(function(d) { return d; });
+
+	gFrontGraphs = page.append("g")
+	.attr("transform", "translate("+[35,55]+")");
+
+	var graphs = gFrontGraphs.selectAll("g").data(frontCategories);
+	graphs.enter()
+	.append("g")
+	.merge(graphs)
+	.attr("class", function(d) { return "graph "+d; })
+	.classed("hidden", function(d) {
+		return d !== frontCategories[0];
+	})
+	.each(drawGraph);
+
+}
+
+function drawGraph(d) {
+
+	var graph = d3.select(this);
+	var data = casualties[0].fronts[d];
+	var domain = Object.keys(data);
+
+	var xScale = d3.scaleBand()
+	.domain(domain)
+	.range([0,graphWidth]);
+	var yScale = d3.scaleLinear()
+	.domain([0,maxCasualties])
+	.range([graphHeight,0]);
+
+	var xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
+	graph.append("g")
+	.attr("class", "axis")
+	.attr("transform", "translate("+[0,graphHeight]+")")
+	.call(xAxis)
+	.selectAll("text")
+    .attr("transform", "translate(12,8),rotate(90)")
+    .style("text-anchor", "start");
+	var yAxis = d3.axisLeft(yScale).tickFormat(d3.format(".1s"));;
+	graph.append("g")
+	.attr("class", "axis")
+	.call(yAxis);
+
+	var bars = graph.selectAll("rect").data(domain);
+	bars.enter()
+	.append("rect")
+	.merge(bars)
+	.attr("class", function(d) {
+		return centralCountries.includes(d)? "central":"entente";
+	})
+	.attr("x", function(d) {
+		return xScale(d) + xScale.bandwidth()/2 - graphBarWidth/2;
+	})
+	.attr("y", graphHeight)
+	.attr("width", graphBarWidth)
+	.append("title");
+
+}
+
+var currentCasualties;
+function updateCasualties(date) {
+
+	for (var i = 0; i < casualties.length; i++) {
+		if (casualties[i].date > date) {
+			currentCasualties = casualties[i-1].fronts;
+			break;
+		}
+	}
+	gFrontGraphs.selectAll("g").each(updateGraph);
+
+}
+
+function updateGraph(d) {
+
+	var casScale = d3.scaleLinear()
+	.domain([0,maxCasualties])
+	.range([0,graphHeight]);
+
+	d3.select(this).selectAll("rect")
+	.attr("height", function(d1) {
+		return casScale(currentCasualties[d][d1]);
+	})
+	.attr("transform", function(d1) {
+		return "translate("+[0,-casScale(currentCasualties[d][d1])]+")";
+	})
+	.select("title")
+	.text(function(d1) {
+		return Math.round(currentCasualties[d][d1]/100)*100;
 	});
 
 }

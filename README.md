@@ -6,16 +6,13 @@ One hundred years ago, Europe was embroiled in a conflagration of unprecedented 
 This project aims to present important events and battles of the war by placing them in time as well as space. It covers the pivotal five years between June 1914 and June 1919 on the European continent, with emphasis placed on military and political history. The project serves mainly as a portal with links to information about the Western, Eastern, Balkan/Macedonian (including Gallipoli) and Italian Fronts.  
 _Note: 1914 borders are used throughout the course of the war and may not represent comtemporary demarcations._
 
-![Image failed to load](/images/screenshot1.png?raw=true)
-![Image failed to load](/images/screenshot2.png?raw=true)
-
 ## Features
 * Zoom in on map for details of cities and national borders
 * Scroll, drag, or hit the play button to travel along the timeline
 * See the evolution of frontlines and alliances
 * Click on event descriptions to get more information
 * Change visibility of map layers in the legend
-* View important figures and casualties data (under construction)
+* View important figures (under construction) and casualties data
 
 ## Credits
 * history.com's [This Day in History](http://www.history.com/this-day-in-history) series

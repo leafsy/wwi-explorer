@@ -356,6 +356,8 @@ function updateTime(duration) {
 	gCountriesAf.classed("hidden", time < new Date("6/28/1919"));
 	gBordersAf.classed("hidden", time < new Date("6/28/1919"));
 
+	updateCasualties(time);
+
 }
 
 var playButton;
