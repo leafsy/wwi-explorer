@@ -35,10 +35,12 @@ var introText = [
 	];
 var frontCategories = ["Western", "Eastern", "Italian", "Balkans"];
 var centralCountries = ["Germany", "Austria", "Turkey", "Bulgaria"];
+var peopleCategories = ["Entente/Allies", "Central Powers"];
 
 var gLegend, gPages, gTabs;
 var introContent;
 var gFrontButtons, gFrontGraphs;
+var gPeopleButtons, gPeopleLists;
 
 function showInfo() {
 
@@ -70,6 +72,7 @@ function drawPages() {
 	d3.selectAll("g.page")
 	.each(function(d) {
 		if (d === 0) return fillIntro(d3.select(this));
+		if (d === 1) return fillPeople(d3.select(this));
 		if (d === 2) return fillCasualties(d3.select(this));
 	});;
 
@@ -118,6 +121,7 @@ function fillIntro(page) {
 	.attr("x", contentPadding-3)
 	.attr("y", contentPadding)
 	.append("xhtml:div")
+	.attr("id", "infoDiv")
 	.attr("xmln", "http://www.w3.org/1999/xhtml")
 	.style("width", pageWidth-2*contentPadding)
 	.style("height", pageHeight-2*contentPadding);
@@ -134,14 +138,79 @@ function fillIntro(page) {
 
 }
 
-function fillCasualties(page) {
+function fillPeople(page) {
 
-	gFrontButtons = page.append("g")
-	.attr("id", "frontButtons")
+	gPeopleButtons = page.append("g")
+	.attr("class", "buttons")
 	.attr("transform", "translate("+[contentPadding,contentPadding]+")");
 
 	var mouseclick = function(d) {
-		d3.selectAll("text.selected").classed("selected", false);
+		gPeopleButtons.selectAll(".selected").classed("selected", false);
+		d3.select(this).classed("selected", true);
+		d3.selectAll(".peopleDiv").classed("hidden", function(d1) {
+			return d !== d1;
+		});
+	}
+
+	var buttons = gPeopleButtons.selectAll("text").data(peopleCategories);
+	buttons.enter()
+	.append("text")
+	.merge(buttons)
+	.classed("selected", function(d) {
+		return d === peopleCategories[0];
+	})
+	.attr("transform", function(d) {
+		var i = peopleCategories.indexOf(d);
+		return "translate("+[i*110,0]+")";
+	})
+	.on("click", mouseclick)
+	.text(function(d) { return d; });
+
+	gPeopleLists = page.append("foreignObject")
+	.attr("x", contentPadding-3)
+	.attr("y", 50);
+	var divs = gPeopleLists.selectAll("div").data(peopleCategories);
+	divs.enter()
+	.append("xhtml:div")
+	.merge(divs)
+	.attr("class", "peopleDiv")
+	.classed("hidden", function(d) {
+		return d !== peopleCategories[0];
+	})
+	.attr("xmln", "http://www.w3.org/1999/xhtml")
+	.style("width", pageWidth-2*contentPadding)
+	.style("height", pageHeight-2*contentPadding-50);
+
+	updatePeople(new Date("6/20/1914"));
+
+}
+
+function updatePeople(date) {
+
+	var divs = gPeopleLists.selectAll("div");
+	divs.html(null)
+	.each(function(d1) {
+		var div = d3.select(this);
+		people.forEach(function(d) {
+			if (d.start <= date && d.end >= date
+				&& peopleCategories.indexOf(d1) !== d.is_allies) {
+				div.append("xhtml:h4").text(d.name)
+				.on("click", function() { window.open(d.link); });
+				div.append("xhtml:h5").text(d.title);
+			}
+		});
+	});
+
+}
+
+function fillCasualties(page) {
+
+	gFrontButtons = page.append("g")
+	.attr("class", "buttons")
+	.attr("transform", "translate("+[contentPadding,contentPadding]+")");
+
+	var mouseclick = function(d) {
+		gFrontButtons.selectAll(".selected").classed("selected", false);
 		d3.select(this).classed("selected", true);
 		d3.selectAll(".graph").classed("hidden", function(d1) {
 			return d !== d1;

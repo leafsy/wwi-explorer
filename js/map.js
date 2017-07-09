@@ -30,7 +30,7 @@ var pathGenerator = d3.geoPath().projection(projection);
 
 var map, gCountriesB, gCountriesA, gCountriesAf, gBordersAf;
 var gRivers, gCities, gFronts, gBattles;
-var focus, gLabel, gCLabel;
+var focus, mask, gLabel, gCLabel;
 
 function showMap() {
 	
@@ -50,6 +50,13 @@ function showMap() {
 	drawCountriesBelow();
 	drawCountriesAbove();
 	drawCountriesAfter();
+
+	mask = map.append("rect")
+	.attr("id", "mask")
+	.attr("class", "hidden")
+	.attr("width", mapWidth)
+	.attr("height", mapHeight);
+
 	//drawRivers();
 	drawFronts();
 	drawBattles();

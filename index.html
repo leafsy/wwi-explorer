@@ -25,6 +25,7 @@ text { fill: #fff; cursor: default; }
 @keyframes blinker { 50% { opacity: 0.5; } }
 -moz-@keyframes blinker { 50% { opacity: 0.5; } }
 -webkit-@keyframes blinker { 50% { opacity: 0.5; } }
+#mask { fill: #111; opacity: 0.2; }
 g.countriesB path { fill: #889; stroke: #555; }
 .entente { fill: #66b !important; }
 .central { fill: #c66 !important; }
@@ -82,13 +83,17 @@ g.tab * { cursor: pointer; }
 g.tab rect { fill: #a97; }
 g.tab text { dominant-baseline: hanging; }
 g.tab.selected text { fill: #333; }
-g.page foreignObject div { overflow-y: scroll; padding-right: 13px; }
-g.page foreignObject div p { margin-top: 0; text-align: justify; }
-g.page foreignObject div h3 { margin: 3px 0; }
-g.page foreignObject div ul { margin: 0; padding-left: 20px; }
-#frontButtons text { dominant-baseline: hanging; cursor: pointer;
+#infoDiv,.peopleDiv { overflow-y: scroll; padding-right: 13px; }
+#infoDiv p { margin-top: 0; text-align: justify; }
+#infoDiv h3 { margin: 3px 0; }
+#infoDiv ul { margin: 0; padding-left: 20px; }
+.peopleDiv h3 { margin: 15px 0 5px; }
+.peopleDiv h4 { margin: 3px 0 0; color: #333; cursor: pointer; }
+.peopleDiv h5 { margin: 0 0 5px; font-weight: normal;
+				font-style: italic; color: #333; }
+.buttons text { dominant-baseline: hanging; cursor: pointer;
 					 fill: #888; }
-#frontButtons text.selected { font-weight: bold; fill: #555; }
+.buttons text.selected { font-weight: bold; fill: #555; }
 g.graph rect { stroke: #888; }
 g.graph rect:hover { stroke: #666; stroke-width: 2px; }
 g.axis line, g.axis path { stroke: #333; opacity: 0.8; }
@@ -121,7 +126,7 @@ g.axis text { fill: #333; opacity: 0.8; }
 <script>
 
 var countries, countries2, borders2, rivers, cities, alliances;
-var fronts, events, battles, casualties;
+var fronts, events, battles, casualties, people;
 
 d3.queue()
 .defer(d3.json, "data/europe_1914.geojson")
@@ -139,8 +144,9 @@ d3.queue()
 .defer(d3.json, "data/front_r.geojson")
 .defer(d3.csv, "data/casualties.csv")
 .defer(d3.tsv, "data/casualties_total.csv")
+.defer(d3.tsv, "data/people.csv")
 .await(function (error, ctry, ctry2, bd2, rvr, cty, evt, sts, bat,
-						bft, ift, wft, eft, rft, cst, cstt) {
+						bft, ift, wft, eft, rft, cst, cstt, ppl) {
 	if (error) { console.log(error); }
 
 	countries = ctry.features;
@@ -198,6 +204,13 @@ d3.queue()
 			d.properties.date = new Date(d.properties.date);
 		});
 	});
+	people = ppl;
+	people.forEach(function(p) {
+		p.start = new Date(p.start);
+		p.end = new Date(p.end);
+		p.is_allies = Number(p.is_allies);
+	});
+
 
 	buildCasualties(cst,cstt);
 

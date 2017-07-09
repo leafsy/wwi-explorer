@@ -328,6 +328,10 @@ function updateTime(duration) {
 
 	focus.classed("hidden", true);
 	year.text(time.getFullYear());
+	mask.classed("hidden", function() {
+		return !(time > new Date("11/11/1918")
+				&& time < new Date("6/28/1919"));
+	});
 
 	gCountriesB.selectAll("path")
 	.attr("class", function(d) {
@@ -357,6 +361,7 @@ function updateTime(duration) {
 	gBordersAf.classed("hidden", time < new Date("6/28/1919"));
 
 	updateCasualties(time);
+	updatePeople(time);
 
 }
 

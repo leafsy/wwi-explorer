@@ -15,9 +15,10 @@ _Note: 1914 borders are used throughout the course of the war and may not repres
 * See the evolution of frontlines and alliances
 * Click on event descriptions to get more information
 * Change visibility of map layers in the legend
-* View important figures (under construction) and casualties data
+* View important figures and casualties data
 
 ## Credits
+* [firstworldwar.com](http://www.firstworldwar.com/)
 * history.com's [This Day in History](http://www.history.com/this-day-in-history) series
 * [National WWI Museum](https://www.theworldwar.org/)
 * The History Place's [timeline of the war](http://www.historyplace.com/worldhistory/firstworldwar/)
