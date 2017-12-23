@@ -278,6 +278,7 @@ function drawDesc() {
 }
 
 function dragged(d) {
+	if (Math.abs(d3.event.dx) < 1) return;
 	timePos[0] = Math.min(limits[0], 
 				 Math.max(limits[1], timePos[0]+d3.event.dx));
 	updateTime(0);
@@ -344,7 +345,10 @@ function updateTime(duration) {
 	gBattles.selectAll("path")
 	.classed("hidden", function(d) {
 		return time < d.properties.start || time > d.properties.end;
-	});
+	})
+	.classed("clicked", false);
+	gBattlelines.selectAll("line")
+	.classed("clicked", false);
 
 	gFronts.selectAll("g").selectAll("path")
 	.classed("hidden", function(d) {
