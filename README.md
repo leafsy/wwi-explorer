@@ -1,5 +1,5 @@
 # wwi-explorer
-### See history play out in this interactive explorer of the First World War in Europe.
+### See history play out in [this interactive explorer](https://kuan9611.github.io/wwi-explorer) of the First World War in Europe.
 
 ![Image failed to load](/images/screenshot1.png?raw=true)
 ![Image failed to load](/images/screenshot2.png?raw=true)
