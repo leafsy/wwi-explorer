@@ -31,7 +31,10 @@ var introText = [
 			"See the evolution of frontlines and alliances;",
 			"Click on event descriptions to get more information;",
 			"Change visibility of map layers in the legend;",
-			"View important figures and casualties data"]]
+			"View important figures and casualties data"]],
+	["p",""],
+	["h3","Contribute"],
+	["p","This is a D3.js project. For more info and/or to contribute, check out the <a href='https://github.com/kuan9611/wwi-explorer' target='_blank'>GitHub repo</a>."]
 	];
 var frontCategories = ["Western", "Eastern", "Italian", "Balkans"];
 var centralCountries = ["Germany", "Austria", "Turkey", "Bulgaria"];
@@ -120,6 +123,8 @@ function fillIntro(page) {
 	introContent = page.append("foreignObject")
 	.attr("x", contentPadding-3)
 	.attr("y", contentPadding)
+	.attr("width", pageWidth)
+	.attr("height", pageHeight)
 	.append("xhtml:div")
 	.attr("id", "infoDiv")
 	.attr("xmln", "http://www.w3.org/1999/xhtml")
@@ -132,7 +137,7 @@ function fillIntro(page) {
 				element.append("xhtml:li").text(l);
 			});
 		} else {
-			element.text(t[1]);
+			element.html(t[1]);
 		}
 	});
 
@@ -168,7 +173,9 @@ function fillPeople(page) {
 
 	gPeopleLists = page.append("foreignObject")
 	.attr("x", contentPadding-3)
-	.attr("y", 50);
+	.attr("y", 50)
+	.attr("width", pageWidth)
+	.attr("height", pageHeight);
 	var divs = gPeopleLists.selectAll("div").data(peopleCategories);
 	divs.enter()
 	.append("xhtml:div")

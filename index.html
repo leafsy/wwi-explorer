@@ -11,10 +11,12 @@
 <script src="js/info.js"></script>
 <style>
 
-body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+html { background-color: #333; }
+body { font-family: 'Alegreya Sans', Calibri, sans-serif; margin: 0; }
 .hidden,.inactive { display: none; }
 text { fill: #fff; cursor: default; }
-#loadscreen { width: 1000px; height: 680px; position: fixed; }
+#loadscreen { position: absolute; left: 0; right: 0; }
+#loadscreen, #svgcontainer { margin: auto; width: 1000px; height: 680px; }
 
 #map { background: #334; }
 .label rect { fill: #000; opacity: 0.6; }
@@ -83,7 +85,7 @@ g.tab * { cursor: pointer; }
 g.tab rect { fill: #a97; }
 g.tab text { dominant-baseline: hanging; }
 g.tab.selected text { fill: #333; }
-#infoDiv,.peopleDiv { overflow-y: hidden; padding-right: 13px; }
+#infoDiv,.peopleDiv { overflow-y: scroll; padding-right: 13px; }
 #infoDiv p { margin-top: 0; text-align: justify; font-size: 12px; }
 #infoDiv h3 { margin: 3px 0; }
 #infoDiv ul { margin: 0; padding-left: 20px; }
@@ -119,9 +121,11 @@ g.axis text { fill: #333; opacity: 0.8; }
 
 <img id="loadscreen" src="images/loading.png" alt="Loading...">
 
+<div id="svgcontainer">
    <svg id="map"></svg><!--
 --><svg id="info"></svg><!--
 --><svg id="dial"></svg>
+</div>
 
 <script>
 
