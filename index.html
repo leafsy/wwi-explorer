@@ -148,8 +148,8 @@ d3.queue()
 .defer(d3.json, "data/front_e.geojson")
 .defer(d3.json, "data/front_r.geojson")
 .defer(d3.csv, "data/casualties.csv")
-.defer(d3.tsv, "data/casualties_total.csv")
-.defer(d3.tsv, "data/people.csv")
+.defer(d3.tsv, "data/casualties_total.tsv")
+.defer(d3.tsv, "data/people.tsv")
 .await(function (error, ctry, ctry2, bd2, rvr, cty, evt, sts, bat,
 						bft, ift, wft, eft, rft, cst, cstt, ppl) {
 	if (error) { console.log(error); }
