@@ -17,6 +17,46 @@ _Note: 1914 borders are used throughout the course of the war and may not repres
 * Change visibility of map layers in the legend
 * View important figures and casualties data
 
+## Contribute
+The easiest way to contribute to this project is by expanding or updating existing information in the `data` directory. Several data files and their content formats are documented below:
+* `events.tsv`: each row is a single-date event that appears on the timeline
+
+  * name - brief description that summarizes event (limit to ~50 characters or less)
+  * link - URL to learn more about event (e.g. http://www.history.com/topics/british-history/easter-rising)
+  * position - which row on timeline to place event (0/1 for Western Front, 2 for Eastern, 3 for Balkan/Italian)
+  * date - date of event in the format _m/d/yyyy_
+  * lat/lng (optional) - latitude and longitude where event took place
+
+* `people.tsv`: each row is an important political or military figure during the war
+
+  * name - full name of the historical figure
+  * title - role of the person in the war (_German general_, _French prime minister_, etc.)
+  * link - URL to learn more about the person (for consistency, use http://www.firstworldwar.com/bio/)
+  * start - start date of the person's involvement (use _1/1/1914_ if involved from the start)
+  * end - end date of the person's involvement (use _1/1/1920_ if involved until the end)
+  * is_allies - 1 if person is on the Entente side, 0 otherwise
+
+* `battles.geojson`: each object in the `features` list is a battle that appears on both timeline and map
+
+  ~~~~
+  {
+    "type": "Feature",
+    "properties": {
+      "name": "Battle of Verdun",                                       // name of the battle
+      "start": "2/21/1916",                                             // start date
+      "end": "12/18/1916",                                              // end date
+      "position": 1,                                                    // same as in events.tsv
+      "link": "https://en.wikipedia.org/wiki/Battle_of_Verdun"          // URL to learn more
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [[...]]                                            // list of lng-lat pairs
+    }
+  }
+  ~~~~
+
+For bugs and/or feature requests, feel free to add a new issue.
+
 ## Credits
 * [firstworldwar.com](http://www.firstworldwar.com/)
 * history.com's [This Day in History](http://www.history.com/this-day-in-history) series
