@@ -22,7 +22,7 @@ var maxCasualties = 9500000;
 
 var introText = [
 	["h3","Overview"],
-	["p","One hundred years ago, Europe was embroiled in a conflagration of un-precedented scale. It started with an assassination and ended with the loss of 15 million lives; it gave birth to weapons of unspeakable horror and left behind a generation thirsting for revenge; it shattered old empires and, from their ashes, ushered in the modern age. The Great War was the seminal catastrophe of the 20th century, and we can learn much about the world we find ourselves in today by studying events that took place a hun-dred years prior."],
+	["p","One hundred years ago, Europe was embroiled in a conflagration of un-precedented scale. It started with an assassination and ended with the loss of 15 million lives; it gave birth to weapons of unspeakable horror and left behind a generation traumatized by their cruelty; it shattered old empires and from their ashes forged the modern age. The Great War was the seminal catastrophe of the 20th century, and we can learn much about the world we find ourselves in today by studying events that took place a hundred years prior."],
 	["p","This project aims to present important events and battles of the war by placing them in time as well as space. It covers the pivotal five years between June 1914 and June 1919 on the European continent, with em-phasis placed on military and political history. The project serves mainly as a portal with links to information about the Western, Eastern, Balkan/Mace-donian (including Gallipoli) and Italian Fronts."],
 	["p","(Note: 1914 borders are used throughout the course of the war and may not represent comtemporary demarcations.)"],
 	["h3","How to Use"],
