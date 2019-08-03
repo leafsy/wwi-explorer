@@ -34,7 +34,7 @@ var introText = [
 			"View important figures and casualties data"]],
 	["p",""],
 	["h3","Contribute"],
-	["p","This is a D3.js project. For more info and/or to contribute, check out the <a href='https://github.com/kuan9611/wwi-explorer' target='_blank'>GitHub repo</a>."]
+	["p","This is a D3.js project. For more info and/or to contribute, check out the <a href='https://github.com/leafsy/wwi-explorer' target='_blank'>GitHub repo</a>."]
 	];
 var frontCategories = ["Western", "Eastern", "Italian", "Balkans"];
 var centralCountries = ["Germany", "Austria", "Turkey", "Bulgaria"];
